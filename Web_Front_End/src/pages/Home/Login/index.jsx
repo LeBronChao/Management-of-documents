@@ -5,8 +5,8 @@ function Login() {
   return (
     <div>
       <div>Login</div>
-      <NavLink to="/Register">Register</NavLink>
-      <NavLink to="/Home">Home</NavLink>
+      <NavLink to="/Home/Register">Register</NavLink><br/>
+      <NavLink to="/Doc">Home</NavLink>
     </div>
   )
 }

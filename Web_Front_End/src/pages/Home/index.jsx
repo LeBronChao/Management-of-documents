@@ -1,29 +1,16 @@
-import {NavLink,Switch,Route,Redirect} from 'react-router-dom'
-import DocList from './DocList'
-import DocManage from './DocManage'
-import UserManage from './UserManage'
+import {Switch,Route,Redirect} from 'react-router-dom'
+import Login from './Login'
+import Register from './Register'
 
 
 function Home() {
   return (
     <div>
-      <div>Home</div>
-      <NavLink to="/Login">退出</NavLink>
-      <div>
-        <NavLink to="/Home/DocList">DocList</NavLink>
-      </div>
-      <div>
-        <NavLink to="/Home/DocManage">DocManage</NavLink>
-      </div>
-      <div>
-        <NavLink to="/Home/UserManage">UserManage</NavLink>
-      </div>
       <div>
         <Switch>
-          <Route path="/Home/DocList" component={DocList}></Route>
-          <Route path="/Home/DocManage" component={DocManage}></Route>
-          <Route path="/Home/UserManage" component={UserManage}></Route>
-          <Redirect from="/Home" to="/Home/DocList"></Redirect>
+          <Route path="/Home/Login" component={Login}></Route>
+          <Route path="/Home/Register" component={Register}></Route>
+          <Redirect from="/Home" to="/Home/Login"></Redirect>
         </Switch>
       </div>
     </div>

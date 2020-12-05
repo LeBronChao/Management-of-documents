@@ -4,7 +4,7 @@ function Register() {
   return (
     <div>
       <div>Register</div>
-      <NavLink to="/Login">Login</NavLink>
+      <NavLink to="/Home/Login">Login</NavLink>
     </div>
   )
 }
