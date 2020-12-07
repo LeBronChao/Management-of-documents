@@ -26,7 +26,7 @@ function Doc() {
         <div className="doc-router-view">
           <Switch>
             <Route path="/Doc/DocList" component={DocList}></Route>
-            <Route path="/Doc/DocPub" component={DocPub}></Route>g
+            <Route path="/Doc/DocPub" component={DocPub}></Route>
             <Route path="/Doc/DocManage" component={DocManage}></Route>
             <Route path="/Doc/UserManage" component={UserManage}></Route>
             <Redirect from="/Doc" to="/Doc/DocList"></Redirect>
