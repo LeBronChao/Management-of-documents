@@ -5,15 +5,13 @@ import Register from './Register'
 
 function Home() {
   return (
-    <div>
-      <div>
+      <div id="home">
         <Switch>
           <Route path="/Home/Login" component={Login}></Route>
           <Route path="/Home/Register" component={Register}></Route>
           <Redirect from="/Home" to="/Home/Login"></Redirect>
         </Switch>
       </div>
-    </div>
   )
 }
 
