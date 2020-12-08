@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Doc from './pages/Doc'
 import Home from './pages/Home'
+import './api/main'
 
 function App() {
   return (
