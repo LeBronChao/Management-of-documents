@@ -13,7 +13,7 @@ axios.defaults.baseURL = PROTOCOL + '://' + ADDRESS + ':' + PORT
 let baseUrl = PROTOCOL + '://' + ADDRESS + ':' + PORT
 let base = {
   docList: '/Doc/GetList',
-  docClick: ' /Doc/Click'
+  docClick: '/Doc/Click'
 }
 
 export default base;

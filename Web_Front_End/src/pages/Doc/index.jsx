@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 import DocList from "./DocList";
 import DocPub from "./DocPub";
@@ -6,6 +7,17 @@ import UserManage from "./UserManage";
 import Detail from "./Detail";
 import "./index.css";
 import School from "../../static/images/school.png";
+=======
+import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
+import DocList from './DocList'
+import DocPub from './DocPub';
+import DocManage from './DocManage'
+import UserManage from './UserManage'
+import Detail from './Detail'
+import './index.css'
+import School from '../../static/images/school.png'
+
+>>>>>>> 6728048bda1bf69c37b1107a0c7d2a2513052680
 
 function Doc() {
   return (

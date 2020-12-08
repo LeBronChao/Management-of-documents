@@ -95,7 +95,8 @@ function DocList(props) {
   }
 
   function SerachDoc(value) {
-    console.log(value)
+    DocListReq(DocListRender, doc_type, value)
+    setLoading(true)
   }
 
   useEffect(() => {

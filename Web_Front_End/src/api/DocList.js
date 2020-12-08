@@ -2,9 +2,10 @@ import axios from 'axios'
 import base from './main'
 
 
-export function DocListReq(render, type) {
+export function DocListReq(render, type, title = "") {
   let data = {
-    type: type
+    type: type,
+    title: title
   }
   axios.post(base.docList, data).then((res) => {
     render(res.data.doc_list)
