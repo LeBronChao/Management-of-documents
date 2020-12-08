@@ -5,7 +5,7 @@ import DocManage from './DocManage'
 import UserManage from './UserManage'
 import Detail from './Detail'
 import './index.css'
-import School from '../../static/img/school.png'
+import School from '../../static/images/school.png'
 
 
 function Doc() {
