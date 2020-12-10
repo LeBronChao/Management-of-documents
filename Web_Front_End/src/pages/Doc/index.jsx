@@ -1,3 +1,4 @@
+
 import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
 import DocList from './DocList'
 import DocPub from './DocPub';
@@ -7,7 +8,6 @@ import Detail from './Detail'
 import './index.css'
 import School from '../../static/images/school.png'
 
-
 function Doc() {
   return (
     <div>
@@ -15,11 +15,41 @@ function Doc() {
         <div className="doc-header row">
           <img src={School} alt="" className="doc-header-school" />
           <nav className="doc-header-nav row">
-            <NavLink to="/Doc/DocList" className="doc-header-nav-item center" activeClassName="doc-header-nav-item-active">公文展示</NavLink>
-            <NavLink to="/Doc/DocPub" className="doc-header-nav-item center" activeClassName="doc-header-nav-item-active">发布公文</NavLink>
-            <NavLink to="/Doc/DocManage" className="doc-header-nav-item center" activeClassName="doc-header-nav-item-active">公文管理</NavLink>
-            <NavLink to="/Doc/UserManage" className="doc-header-nav-item center" activeClassName="doc-header-nav-item-active">用户管理</NavLink>
-            <NavLink to="/Home" className="doc-header-nav-item center" activeClassName="doc-header-nav-item-active">退出</NavLink>
+            <NavLink
+              to="/Doc/DocList"
+              className="doc-header-nav-item center"
+              activeClassName="doc-header-nav-item-active"
+            >
+              公文展示
+            </NavLink>
+            <NavLink
+              to="/Doc/DocPub"
+              className="doc-header-nav-item center"
+              activeClassName="doc-header-nav-item-active"
+            >
+              发布公文
+            </NavLink>
+            <NavLink
+              to="/Doc/DocManage"
+              className="doc-header-nav-item center"
+              activeClassName="doc-header-nav-item-active"
+            >
+              公文管理
+            </NavLink>
+            <NavLink
+              to="/Doc/UserManage"
+              className="doc-header-nav-item center"
+              activeClassName="doc-header-nav-item-active"
+            >
+              用户管理
+            </NavLink>
+            <NavLink
+              to="/Home"
+              className="doc-header-nav-item center"
+              activeClassName="doc-header-nav-item-active"
+            >
+              退出
+            </NavLink>
           </nav>
         </div>
       </header>
@@ -37,11 +67,12 @@ function Doc() {
       </main>
       <footer className="doc-footer-container sp">
         <div className="doc-footer center">
-          Copyright © 公文管理系统 · Made by ChaoWeiwen, XieSenhao, HongQijun, ChenXin
+          Copyright © 公文管理系统 · Made by ChaoWeiwen, XieSenhao, HongQijun,
+          ChenXin
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Doc
+export default Doc;
