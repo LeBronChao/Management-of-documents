@@ -11,7 +11,7 @@ const { Option } = Select
 function DocPub() {
   const [doc_type, setdoc_type] = useState("")
   const [title, settitle] = useState("")
-  const [if_red, setif_red] = useState("")
+  const [if_red, setif_red] = useState(false)
   const [if_bold, setif_bold] = useState(false)
   const [text_state, settext_state] = useState(BraftEditor.createEditorState(null))
   const [text, settext] = useState("")
@@ -36,6 +36,32 @@ function DocPub() {
     settext_html('')
     text_ref.current.clearEditorContent()
     setunit("")
+  }
+
+  function Pub() {
+    let str = "请填写"
+    let bool = false
+    if (!doc_type) {
+      bool = true
+      str += "公文类别 "
+    }
+    if (!title) {
+      bool = true
+      str += "公文标题 "
+    }
+    if (!text) {
+      bool = true
+      str += "公文正文 "
+    }
+    if (!unit) {
+      bool = true
+      str += "发文部门 "
+    }
+    if (bool) {
+      alert(str)
+    } else {
+      DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, init)
+    }
   }
 
   return (
@@ -112,7 +138,7 @@ function DocPub() {
           <Button
             shape="round"
             style={{ width: 160, height: 40, background: "#1990FF", color: "white", fontSize: 15 }}
-            onClick={() => { DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, init) }}
+            onClick={Pub}
           >发布</Button>
           <Button
             shape="round"
