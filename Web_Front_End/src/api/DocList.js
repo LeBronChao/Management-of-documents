@@ -8,7 +8,7 @@ export function DocListReq(render, type, title = "") {
     title: title
   }
   axios.post(base.docList, data).then((res) => {
-    render(res.data.doc_list)
+    render(res.data.Doc)
   }).catch((e) => {
     console.log(e);
   })
