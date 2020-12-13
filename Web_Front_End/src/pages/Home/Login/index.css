@@ -11,7 +11,7 @@
   width: 40px;
   font-size: 18px;
   padding-bottom: 18px;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   border-bottom: 2px solid #14579b;
 }
 #loginBtn {
@@ -30,34 +30,7 @@
 #loginBtn:focus {
   outline: none;
 }
-::placeholder {
-  color: #d4d9e2;
-}
-#account,
-#password {
-  display: block;
-  margin: 0 auto;
-  color: rgb(88, 88, 88);
-  width: 380px;
-  height: 36px;
-  border: none;
-  border-bottom: 1px solid #d4d9e2;
-  outline: none;
-}
-#account:focus,
-#password:focus {
-  outline: none;
-}
-#account {
-  margin-bottom: 36px;
-}
-#fg_pw {
-  margin: 21px auto 36px auto;
-  width: 380px;
-  text-align: right;
-  font-size: 12px;
-  color: #666666;
-}
+
 #rigisterText {
   font-size: 12px;
   margin: 18px auto 0 auto;
@@ -66,4 +39,8 @@
 #nl_rg {
   color: #14579b;
   text-decoration: none;
+}
+
+.ant-form-item-control-input {
+  width: 385px;
 }

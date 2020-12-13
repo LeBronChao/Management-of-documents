@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const PROTOCOL = 'http'
-const ADDRESS = 'localhost'
+const ADDRESS = '10.118.21.172'
 const PORT = 3001
 
 axios.defaults.baseURL = PROTOCOL + '://' + ADDRESS + ':' + PORT
@@ -13,7 +13,9 @@ axios.defaults.baseURL = PROTOCOL + '://' + ADDRESS + ':' + PORT
 let baseUrl = PROTOCOL + '://' + ADDRESS + ':' + PORT
 let base = {
   docList: '/Doc/GetList',
-  docClick: '/Doc/Click'
+  docClick: '/Doc/Click',
+  docPub: '/Doc/Pub',
+  detail: '/Doc/Get'
 }
 
 export default base;

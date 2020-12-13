@@ -1,22 +1,32 @@
 import { NavLink } from "react-router-dom";
 import { Form, Input } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./index.css";
+import { useState } from "react";
 
 function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navToHome = function () {
     props.history.push("/Doc");
+    console.log(username);
+    console.log(password);
   };
   const formItemLayout = {
     wrapperCol: {
       sm: { offset: 3 },
     },
   };
+  const changeHandler = (e) => {
+    e.target.name === "username"
+      ? setUsername(e.target.value)
+      : setPassword(e.target.value);
+  };
   return (
     <div id="subBox">
       <div id="loginText">登录</div>
       <Form {...formItemLayout} layout="horizontal">
         <Form.Item
-          name="account"
           rules={[
             {
               required: true,
@@ -24,10 +34,15 @@ function Login(props) {
             },
           ]}
         >
-          <Input placeholder="账号" />
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="账号"
+            value={username}
+            name="username"
+            onChange={changeHandler}
+          />
         </Form.Item>
         <Form.Item
-          name="password"
           rules={[
             {
               required: true,
@@ -35,13 +50,19 @@ function Login(props) {
             },
           ]}
         >
-          <Input placeholder="密码" />
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={changeHandler}
+          />
         </Form.Item>
+        <button id="loginBtn" onClick={navToHome}>
+          登录
+        </button>
       </Form>
-      <p id="fg_pw">忘记密码</p>
-      <button id="loginBtn" onClick={navToHome}>
-        登录
-      </button>
       <p id="rigisterText">
         没有账号？
         <NavLink id="nl_rg" to="/Home/Register">

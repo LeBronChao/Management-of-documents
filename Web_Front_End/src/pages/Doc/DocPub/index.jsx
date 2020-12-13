@@ -1,6 +1,7 @@
 import { Radio, Input, Checkbox, Select, Button } from 'antd'
 import { UploadOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { DocPubReq } from '../../../api/DocPub'
 import './index.css'
 import 'braft-editor/dist/index.css'
 import BraftEditor from 'braft-editor'
@@ -12,9 +13,12 @@ function DocPub() {
   const [title, settitle] = useState("")
   const [if_red, setif_red] = useState("")
   const [if_bold, setif_bold] = useState(false)
+  const [text_state, settext_state] = useState(BraftEditor.createEditorState(null))
   const [text, settext] = useState("")
   const [text_html, settext_html] = useState("")
   const [unit, setunit] = useState("")
+
+  const text_ref = useRef()
 
   useEffect(() => {
     setdoc_type(doc_type)
@@ -22,6 +26,17 @@ function DocPub() {
     setif_bold(if_bold)
     setif_red(if_red)
   }, [doc_type, title, if_red, if_bold])
+
+  function init() {
+    setdoc_type('')
+    settitle('')
+    setif_bold(false)
+    setif_red(null)
+    settext('')
+    settext_html('')
+    text_ref.current.clearEditorContent()
+    setunit("")
+  }
 
   return (
     <div className="doc-pub-page sp">
@@ -44,20 +59,21 @@ function DocPub() {
               <Radio value={false} className="row cz"><div className="doc-pub-color-box doc-pub-color-black cz"></div></Radio>
               <Radio value={true} className="row cz"><div className="doc-pub-color-box doc-pub-color-red cz"></div></Radio>
             </Radio.Group>
-            <Checkbox onChange={e => { setif_bold(e.target.checked); console.log(if_bold) }} checked={if_bold}>粗体</Checkbox>
+            <Checkbox onChange={e => { setif_bold(e.target.checked); }} checked={if_bold}>粗体</Checkbox>
           </div>
           <div className="doc-pub-table-row2 row cz">
             <div className="doc-pub-table-title">正文</div>
             <BraftEditor
               className="doc-pub-table-edit"
-              value={text}
-              onChange={(value) => { settext(value); settext_html(value.toHTML()) }}
+              value={text_state}
+              onChange={(value) => { settext_state(value); settext(value.toText()); settext_html(value.toHTML()); }}
+              ref={text_ref}
             />
           </div>
           <div className="doc-pub-table-row1 row cz" style={{ zIndex: 6 }}>
             <div className="doc-pub-table-title" style={{ marginLeft: 32 }}>发文部门</div>
             <Select defaultValue="" style={{ width: 200 }} allowClear value={unit} onChange={(val) => { setunit(val) }}>
-              <Option value="1">大数据与互联网学院</Option>
+              <Option value="大数据与互联网学院">大数据与互联网学院</Option>
               <Option value="中德智能制造学院">中德智能制造学院</Option>
               <Option value="创意与设计学院">创意与设计学院</Option>
               <Option value="健康与环境工程学院">健康与环境工程学院</Option>
@@ -93,7 +109,16 @@ function DocPub() {
           </div>
         </div>
         <div className="doc-pub-button-container center">
-          <Button shape="round" style={{ width: 160, height: 40, background: "#1990FF", color: "white", fontSize: 15 }}>发布</Button>
+          <Button
+            shape="round"
+            style={{ width: 160, height: 40, background: "#1990FF", color: "white", fontSize: 15 }}
+            onClick={() => { DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, init) }}
+          >发布</Button>
+          <Button
+            shape="round"
+            style={{ width: 160, height: 40, fontSize: 15, marginLeft: 20 }}
+            onClick={init}
+          >清空</Button>
         </div>
       </div>
     </div>

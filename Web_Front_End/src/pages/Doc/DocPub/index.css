@@ -4,11 +4,12 @@
 
 .doc-pub-container {
   width: 1080px;
+  margin-bottom: 20px;
 }
 
 .doc-pub-table {
   border: 1px solid #BBBBBB;
-  margin-top: 60px;
+  margin-top: 20px;
   width: 1080px;
 }
 
@@ -16,7 +17,6 @@
   width: 1080px;
   height: 53px;
   border: 0.5px solid #BBBBBB;
-  z-index: 6;
 }
 
 .doc-pub-table-title {
@@ -49,13 +49,13 @@
 
 .doc-pub-table-row2 {
   width: 1080px;
-  height: 421px;
+  height: 600px;
   border: 0.5px solid #BBBBBB;
 }
 
 .doc-pub-table-edit {
   width: 979px;
-  height: 421px;
+  height: 200px;
   border-left: 1px solid #BBBBBB;
   z-index: 0;
 }
@@ -63,5 +63,5 @@
 .doc-pub-button-container {
   width: 1080px;
   margin-top: 20px;
-  z-index: 6;
+  z-index: 1;
 }
