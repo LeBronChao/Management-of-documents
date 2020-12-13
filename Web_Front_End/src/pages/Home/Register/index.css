@@ -1,0 +1,39 @@
+
+#subBox {
+  width: 520px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+}
+#registerText {
+  text-align: center;
+  padding-top: 40px;
+  width: 40px;
+  font-size: 18px;
+  padding-bottom: 18px;
+  margin: 0 auto 20px auto;
+  border-bottom: 2px solid #14579b;
+}
+.ant-input {
+  width: 385px;
+}
+.ant-input-password {
+  width: 385px;
+}
+#registerBtn {
+  display: block;
+  margin: 0 auto;
+  width: 380px;
+  height: 56px;
+  line-height: 23px;
+  border-radius: 28px;
+  background-color: rgba(20, 87, 155, 100);
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+}
+#registerBtn:focus {
+  outline: none;
+}

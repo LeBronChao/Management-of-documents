@@ -8,8 +8,8 @@ function Login(props) {
   return (
     <div id="subBox">
       <div id="loginText">登录</div>
-      <input type="text" name="" id="account" value={"账号"} />
-      <input type="text" name="" id="password" value={"密码"} />
+      <input type="text" name="" id="account" placeholder="账号" />
+      <input type="text" name="" id="password" placeholder="请输入内容" />
       <p id="fg_pw">忘记密码</p>
       <button id="loginBtn" onClick={navToHome}>
         登录

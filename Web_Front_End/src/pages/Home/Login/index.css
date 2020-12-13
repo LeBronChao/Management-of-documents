@@ -30,11 +30,14 @@
 #loginBtn:focus {
   outline: none;
 }
+::placeholder {
+  color: #d4d9e2;
+}
 #account,
 #password {
   display: block;
   margin: 0 auto;
-  color: #d4d9e2;
+  color: rgb(88, 88, 88);
   width: 380px;
   height: 36px;
   border: none;
