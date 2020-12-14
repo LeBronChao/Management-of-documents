@@ -35,7 +35,7 @@ router.post('/GetList', async function (req, res, next) {
       doc_no: value.id
     })
   })
-  res.json({ Doc: Doc })
+  res.status(200).json({ Doc: Doc })
 })
 
 router.post('/Pub', async function (req, res, next) {
@@ -68,7 +68,7 @@ router.post('/Pub', async function (req, res, next) {
     createdAt: new Date(),
     updatedAt: new Date()
   })
-  res.json({
+  res.status(200).json({
     status: true,
     errmsg: ""
   })
@@ -79,7 +79,7 @@ router.post('/Click', async function (req, res, next) {
   doc.update({
     click_count: doc.click_count + 1
   })
-  res.json({
+  res.status(200).json({
     status: true,
     errmsg: ''
   })
@@ -87,10 +87,8 @@ router.post('/Click', async function (req, res, next) {
 
 router.post('/Get', async function (req, res, next) {
   let doc = await models.Doc.findByPk(req.body.doc_no)
-  res.json(doc)
+  res.status(200).json(doc)
 })
-
-
 
 
 module.exports = router;
