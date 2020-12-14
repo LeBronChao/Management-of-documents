@@ -26,7 +26,7 @@ router.post('/Login', async function (req, res, next) {
     })
   } else {
     // 注意默认情况 Token 必须以 Bearer+空格 开头
-    const token = 'Bearer ' + jwt.sign(
+    const token = jwt.sign(
       {
         ...user
       },
