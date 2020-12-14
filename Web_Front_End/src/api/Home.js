@@ -27,7 +27,7 @@ export function LoginReq(user_no, password, to) {
 
 export function RegisterReq(user_no, password, name, phone, unit, to) {
   let data = { user_no, password, name, phone, unit }
-  axios.post(base.reg_date, data).then((res) => {
+  axios.post(base.register, data).then((res) => {
     if (res.data.status) {
       alert('注册成功！')
       to()

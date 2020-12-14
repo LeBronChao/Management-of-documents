@@ -16,9 +16,11 @@ function Register(props) {
       sm: { offset: 3 },
     },
   };
-
+  function nav() {
+    props.history.push("/Home/Login")
+  }
   const navToLogin = () => {
-    RegisterReq(username, password, name, phoneNumber, department, props.history.push("/Home/Login"))
+    RegisterReq(username, password, name, phoneNumber, department, nav)
   };
 
   const changeHandler = (e) => {
