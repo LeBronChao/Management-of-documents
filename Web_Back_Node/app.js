@@ -12,15 +12,9 @@ var UserRouter = require('./routes/user')
 var app = express();
 
 app.all('*', function (req, res, next) {
-  //设为指定的域
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Headers', 'Authorization');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header("X-Powered-By", ' 3.2.1');
+  res.header('Access-Control-Allow-Origin', '*'); //当允许携带cookies此处的白名单不能写’*’
+  res.header('Access-Control-Allow-Headers', 'content-type,Content-Length, Authorization,Origin,Accept,X-Requested-With'); //允许的请求头
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT'); //允许的请求方法
   next();
 });
 

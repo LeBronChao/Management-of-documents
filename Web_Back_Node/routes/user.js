@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var Op = models.Sequelize.Op
 var md5 = require('js-md5')
+var jwt = require('jsonwebtoken')
 
 router.post('/Login', async function (req, res, next) {
 
@@ -24,7 +25,7 @@ router.post('/Login', async function (req, res, next) {
     })
   } else {
     // 注意默认情况 Token 必须以 Bearer+空格 开头
-    const token = jwt.sign(
+    const token = 'Bearer ' + jwt.sign(
       {
         ...user
       },

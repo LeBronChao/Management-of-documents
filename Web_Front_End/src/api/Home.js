@@ -16,6 +16,7 @@ export function LoginReq(user_no, password, to) {
       user.jur = data.jur
       sessionStorage.setItem('sztu_doc_user', JSON.stringify(user))
       sessionStorage.setItem('sztu_doc_token', data.token)
+      alert('登录成功！')
       to()
     } else {
       alert('登录失败' + res.data.errmsg)

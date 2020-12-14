@@ -8,8 +8,11 @@ import { LoginReq } from '../../../api/Home'
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  function nav() {
+    props.history.push("/Doc")
+  }
   const navToHome = function () {
-    LoginReq(username, password, props.history.push("/Doc"))
+    LoginReq(username, password, nav)
   };
   const formItemLayout = {
     wrapperCol: {

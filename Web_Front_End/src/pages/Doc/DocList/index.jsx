@@ -7,6 +7,7 @@ const { Search } = Input;
 
 
 function DocList(props) {
+
   let [doc_type, setDocType] = useState('全部信息')
   let [doc_list, setDocList] = useState([])
   let [loading, setLoading] = useState(true)
