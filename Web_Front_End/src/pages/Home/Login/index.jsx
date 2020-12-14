@@ -40,6 +40,7 @@ function Login(props) {
             value={username}
             name="username"
             onChange={changeHandler}
+            size="large"
           />
         </Form.Item>
         <Form.Item
@@ -57,6 +58,7 @@ function Login(props) {
             placeholder="Password"
             value={password}
             onChange={changeHandler}
+            size="large"
           />
         </Form.Item>
         <button id="loginBtn" onClick={navToHome}>
