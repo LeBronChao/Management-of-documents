@@ -7,19 +7,22 @@ var jwt = require('express-jwt')
 
 
 var docRouter = require('./routes/doc')
-var HomeRouter = require('./routes/home')
 var UserRouter = require('./routes/user')
 
 var app = express();
+
 app.all('*', function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  //设为指定的域
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Authorization');
   res.header('Access-Control-Allow-Headers', '*');
-  res.header('Authorization', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-  res.header('Content-Type', 'application/json;charset=utf-8');
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header("X-Powered-By", ' 3.2.1');
   next();
 });
-
 
 
 // view engine setup
@@ -32,16 +35,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(jwt({
-//   secret: 'secret12345',
-//   algorithms: ['HS256']
-//   // 签名的密钥 或 PublicKey
-// }).unless({
-//   path: ['/Home/Login', '/Home/Register']  // 指定路径不经过 Token 解析
-// }))
+app.use(jwt({
+  secret: 'secret12345',
+  algorithms: ['HS256']
+  // 签名的密钥 或 PublicKey
+}).unless({
+  path: ['/User/Login', '/User/Register']  // 指定路径不经过 Token 解析
+}))
 
 app.use('/Doc', docRouter)
-app.use('/Home', HomeRouter)
 app.use('/User', UserRouter)
 
 // catch 404 and forward to error handler
