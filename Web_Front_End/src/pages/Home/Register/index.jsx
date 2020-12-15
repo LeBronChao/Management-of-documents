@@ -1,6 +1,8 @@
 import "./index.css";
 import { Form, Input, Select } from "antd";
 import { useState } from "react";
+import { RegisterReq } from '../../../api/Home'
+
 function Register(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,18 +16,11 @@ function Register(props) {
       sm: { offset: 3 },
     },
   };
-
+  function nav() {
+    props.history.push("/Home/Login")
+  }
   const navToLogin = () => {
-    let registerData = [
-      username,
-      password,
-      confirm,
-      name,
-      phoneNumber,
-      department,
-    ];
-    console.log(registerData);
-    props.history.push("/Home/Login");
+    RegisterReq(username, password, name, phoneNumber, department, nav)
   };
 
   const changeHandler = (e) => {

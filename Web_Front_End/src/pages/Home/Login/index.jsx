@@ -3,14 +3,16 @@ import { Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./index.css";
 import { useState } from "react";
+import { LoginReq } from '../../../api/Home'
 
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  function nav() {
+    props.history.push("/Doc")
+  }
   const navToHome = function () {
-    props.history.push("/Doc");
-    console.log(username);
-    console.log(password);
+    LoginReq(username, password, nav)
   };
   const formItemLayout = {
     wrapperCol: {

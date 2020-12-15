@@ -31,7 +31,7 @@ router.post('/GetList', async function (req, res, next) {
       date: value.pub_time,
       color: title_value.color,
       bold: title_value.bold,
-      file: value.file_url,
+      file: value.file_url ? true : false,
       doc_no: value.id
     })
   })
@@ -90,5 +90,44 @@ router.post('/Get', async function (req, res, next) {
   res.status(200).json(doc)
 })
 
+router.get('/ExmList', async function (req, res, next) {
+  let Doc_List = await models.Doc.findAll({
+    where: {
+      exm_status: 0
+    },
+    include: [models.Doc_Title]
+  })
+  let Doc = []
+  Doc_List.forEach((value) => {
+    let title_value = value.dataValues.Doc_Title
+    value = value.dataValues
+    Doc.push({
+      type: value.type,
+      unit: value.unit,
+      title: value.title,
+      date: value.pub_time,
+      color: title_value.color,
+      bold: title_value.bold,
+      file: value.file_url ? true : false,
+      doc_no: value.id
+    })
+  })
+  res.status(200).json({ Doc: Doc })
+})
+
+router.post('/Exm', async function (req, res, next) {
+  let doc = await models.Doc.findOne({
+    where: {
+      doc_no: req.body.doc_no,
+    }
+  })
+  doc.update({
+    status: req.body.status
+  })
+  res.status(200).json({
+    status: true,
+    errmsg: ""
+  })
+})
 
 module.exports = router;
