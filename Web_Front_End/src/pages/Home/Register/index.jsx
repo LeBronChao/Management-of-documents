@@ -1,14 +1,14 @@
 import "./index.css";
 import { Form, Input, Select } from "antd";
 import { useState } from "react";
-import { RegisterReq } from '../../../api/Home'
+import { RegisterReq } from "../../../api/Home";
 
 function Register(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [confirm, setConfirm] = useState();
+  const [name, setName] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
   const [department, setDepartment] = useState();
   const { Option } = Select;
   const formItemLayout = {
@@ -17,10 +17,10 @@ function Register(props) {
     },
   };
   function nav() {
-    props.history.push("/Home/Login")
+    props.history.push("/Home/Login");
   }
   const navToLogin = () => {
-    RegisterReq(username, password, name, phoneNumber, department, nav)
+    RegisterReq(username, password, name, phoneNumber, department, nav);
   };
 
   const changeHandler = (e) => {
@@ -49,10 +49,15 @@ function Register(props) {
       <div id="registerText">注册</div>
       <Form {...formItemLayout} layout="horizontal">
         <Form.Item
+          name="username"
           rules={[
             {
               required: true,
-              message: "请输入你的工号或学号！",
+              message: "请输入你的工号或学号!",
+            },
+            {
+              pattern: /^\d{5,12}$/,
+              message: "请输入5-12位的数字",
             },
           ]}
         >
@@ -60,14 +65,19 @@ function Register(props) {
             value={username}
             name="username"
             onChange={changeHandler}
-            placeholder="工号/学号"
+            placeholder="工号/学号 （长度为5-12位，仅能使用数字）"
           />
         </Form.Item>
         <Form.Item
+          name="password"
           rules={[
             {
               required: true,
               message: "请输入你的密码！",
+            },
+            {
+              pattern: /^\w{8,16}$/,
+              message: "请输入长度为8-16位的密码，仅能使用数字/字母/下划线",
             },
           ]}
         >
@@ -75,10 +85,11 @@ function Register(props) {
             value={password}
             name="password"
             onChange={changeHandler}
-            placeholder="密码"
+            placeholder="密码 （长度为8-16位，仅能使用数字/字母/下划线）"
           />
         </Form.Item>
         <Form.Item
+          name="confirm"
           rules={[
             {
               required: true,
@@ -108,20 +119,29 @@ function Register(props) {
               required: true,
               message: "请输入你的姓名！",
             },
+            {
+              pattern: /^[\u4e00-\u9fa5]{2,10}$/,
+              message: "请输入长度为2-10个中文字符的姓名！",
+            },
           ]}
         >
           <Input
             value={name}
             name="name"
             onChange={changeHandler}
-            placeholder="姓名"
+            placeholder="姓名 （中文真实姓名）"
           />
         </Form.Item>
         <Form.Item
+          name="phoneNumber"
           rules={[
             {
               required: true,
               message: "请输入你的手机号码！",
+            },
+            {
+              pattern: /^1[3-9]\d{9}$/,
+              message: "请输入正确的手机号码！",
             },
           ]}
         >
@@ -133,6 +153,7 @@ function Register(props) {
           />
         </Form.Item>
         <Form.Item
+          name="department"
           rules={[
             {
               required: true,

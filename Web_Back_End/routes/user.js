@@ -53,11 +53,11 @@ router.post('/Register', async function (req, res, next) {
   let data = req.body
   let bool = false
   let errmsg = "请正确填写 "
-  if (!/\d[5,12]/.test(data.user_no)) {
+  if (!/\d{5,12}/.test(data.user_no)) {
     bool = true
     errmsg += "工号/学号 "
   }
-  if (!/\w[8,16]/.test(data.password)) {
+  if (!/\w{8,16}/.test(data.password)) {
     bool = true
     errmsg += "密码 "
   }
