@@ -1,0 +1,44 @@
+#bg {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f2;
+}
+#schoolLogo {
+  width: 38px;
+  height: 48px;
+}
+#mainBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  width: 1000px;
+  height: 550px;
+  background-color: #fff;
+}
+#banner {
+  position: absolute;
+  left: 0;
+  top: -70px;
+  height: 48px;
+}
+#banner img {
+  display: block;
+  float: left;
+}
+#banner span {
+  padding-left: 10px;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 48px;
+  font-family: SourceHanSansSC-bold;
+}
+#img1034 {
+  width: 480px;
+  height: 550px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

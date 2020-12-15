@@ -1,0 +1,66 @@
+#subBox {
+  width: 520px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+}
+#loginText {
+  text-align: center;
+  padding-top: 114px;
+  width: 40px;
+  font-size: 18px;
+  padding-bottom: 18px;
+  margin: 0 auto;
+  border-bottom: 2px solid #14579b;
+}
+#loginBtn {
+  display: block;
+  margin: 0 auto;
+  width: 380px;
+  height: 56px;
+  line-height: 23px;
+  border-radius: 28px;
+  background-color: rgba(20, 87, 155, 100);
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+}
+#loginBtn:focus {
+  outline: none;
+}
+#account,
+#password {
+  display: block;
+  margin: 0 auto;
+  color: #d4d9e2;
+  width: 380px;
+  height: 36px;
+  border: none;
+  border-bottom: 1px solid #d4d9e2;
+  outline: none;
+}
+#account:focus,
+#password:focus {
+  outline: none;
+}
+#account {
+  margin-bottom: 36px;
+}
+#fg_pw {
+  margin: 21px auto 36px auto;
+  width: 380px;
+  text-align: right;
+  font-size: 12px;
+  color: #666666;
+}
+#rigisterText {
+  font-size: 12px;
+  margin: 18px auto 0 auto;
+  width: 108px;
+}
+#nl_rg {
+  color: #14579b;
+  text-decoration: none;
+}
