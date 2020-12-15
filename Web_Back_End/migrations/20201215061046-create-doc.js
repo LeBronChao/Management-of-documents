@@ -32,6 +32,9 @@ module.exports = {
       file_url: {
         type: Sequelize.STRING
       },
+      file_name: {
+        type: Sequelize.STRING
+      },
       exm_status: {
         type: Sequelize.INTEGER
       },

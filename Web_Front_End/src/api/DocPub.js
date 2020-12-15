@@ -2,21 +2,36 @@ import axios from 'axios'
 import base from './main'
 
 
-export function DocPubReq(type, title, color, bold, text, text_html, unit, init) {
+export async function DocPubReq(type, title, color, bold, text, text_html, unit, file, file_name, init) {
+  let file_path, houzhui
+  let bool1, bool2, errmsg = ''
+  await axios.post(base.docFile, file, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+    bool2 = res.data.status
+    file_path = res.data.file_path
+    houzhui = res.data.houzhui
+  }).catch((e) => {
+    console.log(e)
+  })
+
   let data = {
     color: color ? 1 : 0,
     bold: bold ? 1 : 0,
-    type, title, text, text_html, unit
+    type, title, text, text_html, unit, file_name, file_path, houzhui
   }
-  axios.post(base.docPub, data).then((res) => {
-    if (res.data.status) {
+  if (bool2) {
+    await axios.post(base.docPub, data).then((res) => {
+      bool1 = res.data.status
+      errmsg += res.data.errmsg
+    }).catch((e) => {
+      console.log(e)
+    })
+    if (bool1) {
       init()
       init()
       alert('发布成功！')
     } else {
-      alert('发布失败' + res.data.errmsg)
+      alert('发布失败' + errmsg)
     }
-  }).catch((e) => {
-    console.log(e)
-  })
+  }
+
 }

@@ -7,6 +7,7 @@ import UserManage from './UserManage'
 import Detail from './Detail'
 import './index.css'
 import School from '../../static/images/school.png'
+import ManageDetail from './MangeDetail'
 
 function Doc() {
   return (
@@ -61,6 +62,7 @@ function Doc() {
             <Route path="/Doc/DocManage" component={DocManage}></Route>
             <Route path="/Doc/UserManage" component={UserManage}></Route>
             <Route path="/Doc/Detail/:doc_no" component={Detail}></Route>
+            <Route path="/Doc/ManageDetail/:doc_no" component={ManageDetail}></Route>
             <Redirect from="/Doc" to="/Doc/DocList"></Redirect>
           </Switch>
         </div>

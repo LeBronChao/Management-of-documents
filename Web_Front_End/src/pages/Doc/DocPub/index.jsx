@@ -17,8 +17,10 @@ function DocPub() {
   const [text, settext] = useState("")
   const [text_html, settext_html] = useState("")
   const [unit, setunit] = useState("")
+  const [file_name, setfile_name] = useState("")
 
   const text_ref = useRef()
+  const doc_file = useRef()
 
   useEffect(() => {
     setdoc_type(doc_type)
@@ -36,6 +38,11 @@ function DocPub() {
     settext_html('')
     text_ref.current.clearEditorContent()
     setunit("")
+  }
+
+  function importFile() {
+    doc_file.current.click()
+
   }
 
   function Pub() {
@@ -60,7 +67,9 @@ function DocPub() {
     if (bool) {
       alert(str)
     } else {
-      DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, init)
+      let file = new FormData()
+      file.append('avatar', doc_file.current.files[0])
+      DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, file, file_name, init)
     }
   }
 
@@ -131,7 +140,9 @@ function DocPub() {
           </div>
           <div className="doc-pub-table-row1 row cz">
             <div className="doc-pub-table-title" style={{ marginLeft: 32 }}>上传附件</div>
-            <Button icon={<UploadOutlined />} shape="round">上传附件</Button>
+            <Button icon={<UploadOutlined />} shape="round" onClick={importFile}>选择文件</Button>
+            <input type="file" ref={doc_file} style={{ display: 'none' }} onChange={(e) => { setfile_name(e.target.files[0].name); }} />
+            <div style={{ marginLeft: 10 }}>{file_name}</div>
           </div>
         </div>
         <div className="doc-pub-button-container center">
