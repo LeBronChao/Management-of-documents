@@ -7,6 +7,7 @@ const { Search } = Input;
 
 
 function DocList(props) {
+
   let [doc_type, setDocType] = useState('全部信息')
   let [doc_list, setDocList] = useState([])
   let [loading, setLoading] = useState(true)
@@ -30,14 +31,14 @@ function DocList(props) {
       dataIndex: 'unit',
       key: 'unit',
       align: 'center',
-      width: '120px'
+      width: '180px'
     },
     {
       title: '公文标题',
       dataIndex: 'title',
       key: 'title',
       align: 'center',
-      width: '560px',
+      width: '514px',
       render: (value) => {
         let styleObj = {}
         styleObj.color = value[1] ? "red" : "black"
@@ -52,7 +53,7 @@ function DocList(props) {
       dataIndex: 'file',
       key: 'file',
       align: 'center',
-      width: '114px',
+      width: '100px',
       render: (bool) => {
         if (bool)
           return (<PaperClipOutlined style={{ width: '24px', height: '24px' }} />)
@@ -78,6 +79,7 @@ function DocList(props) {
     for (let i = 0; i < list.length; i++) {
       let title = [list[i].title, list[i].color, list[i].bold]
       list[i].title = title
+      list[i].date = list[i].date.slice(0, 10)
       delete list[i].color
       delete list[i].bold
     }

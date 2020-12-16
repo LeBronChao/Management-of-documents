@@ -5,16 +5,22 @@
   top: 0;
   background-color: #fff;
 }
-#loginText {
+#registerText {
   text-align: center;
-  padding-top: 114px;
+  padding-top: 40px;
   width: 40px;
   font-size: 18px;
   padding-bottom: 18px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 20px auto;
   border-bottom: 2px solid #14579b;
 }
-#loginBtn {
+.ant-input {
+  width: 385px;
+}
+.ant-input-password {
+  width: 385px;
+}
+#registerBtn {
   display: block;
   margin: 0 auto;
   width: 380px;
@@ -27,20 +33,6 @@
   text-align: center;
   border: none;
 }
-#loginBtn:focus {
+#registerBtn:focus {
   outline: none;
-}
-
-#rigisterText {
-  font-size: 12px;
-  margin: 18px auto 0 auto;
-  width: 108px;
-}
-#nl_rg {
-  color: #14579b;
-  text-decoration: none;
-}
-
-.ant-form-item-control-input {
-  width: 385px;
 }

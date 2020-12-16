@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> a892a1fe3338464b0e5f3463360ce0be8db93245
 import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
 import DocList from './DocList'
 import DocPub from './DocPub';
@@ -66,7 +70,7 @@ function Doc() {
       </main>
       <footer className="doc-footer-container sp">
         <div className="doc-footer center">
-          Copyright © 公文管理系统 · Made by ChaoWeiwen, XieSenhao, HongQijun,
+          Copyright © 公文管理系统 · Developed by ChaoWeiwen, XieSenhao, HongQijun,
           ChenXin
         </div>
       </footer>
