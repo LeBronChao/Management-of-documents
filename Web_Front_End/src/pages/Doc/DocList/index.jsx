@@ -1,114 +1,108 @@
-import { Radio, Input, Table } from 'antd';
-import { PaperClipOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react';
-import './index.css'
-import { DocListReq, DocClickReq } from '../../../api/DocList'
+import { Radio, Input, Table } from "antd";
+import { PaperClipOutlined } from "@ant-design/icons";
+import { useState, useEffect } from "react";
+import "./index.css";
+import { DocListReq, DocClickReq } from "../../../api/DocList";
 const { Search } = Input;
 
-
 function DocList(props) {
-
-  let [doc_type, setDocType] = useState('全部信息')
-  let [doc_list, setDocList] = useState([])
-  let [loading, setLoading] = useState(true)
+  let [doc_type, setDocType] = useState("全部信息");
+  let [doc_list, setDocList] = useState([]);
+  let [loading, setLoading] = useState(true);
   const columns = [
     {
-      title: '序号',
-      dataIndex: 'doc_no',
-      key: 'doc_no',
-      align: 'center',
-      width: '60px'
+      title: "序号",
+      dataIndex: "doc_no",
+      key: "doc_no",
+      align: "center",
+      width: "60px",
     },
     {
-      title: '类别',
-      dataIndex: 'type',
-      key: 'type',
-      align: 'center',
-      width: '110px'
+      title: "类别",
+      dataIndex: "type",
+      key: "type",
+      align: "center",
+      width: "110px",
     },
     {
-      title: '发文单位',
-      dataIndex: 'unit',
-      key: 'unit',
-      align: 'center',
-      width: '180px'
+      title: "发文单位",
+      dataIndex: "unit",
+      key: "unit",
+      align: "center",
+      width: "180px",
     },
     {
-      title: '公文标题',
-      dataIndex: 'title',
-      key: 'title',
-      align: 'center',
-      width: '514px',
+      title: "公文标题",
+      dataIndex: "title",
+      key: "title",
+      align: "center",
+      width: "514px",
       render: (value) => {
-        let styleObj = {}
-        styleObj.color = value[1] ? "red" : "black"
-        styleObj.fontWeight = value[2] ? 700 : 400
-        return (
-          <div style={styleObj}>{value[0]}</div>
-        )
-      }
+        let styleObj = {};
+        styleObj.color = value[1] ? "red" : "black";
+        styleObj.fontWeight = value[2] ? 700 : 400;
+        return <div style={styleObj}>{value[0]}</div>;
+      },
     },
     {
-      title: '附件',
-      dataIndex: 'file',
-      key: 'file',
-      align: 'center',
-      width: '100px',
+      title: "附件",
+      dataIndex: "file",
+      key: "file",
+      align: "center",
+      width: "100px",
       render: (bool) => {
         if (bool)
-          return (<PaperClipOutlined style={{ width: '24px', height: '24px' }} />)
-        else
-          return
-      }
+          return (
+            <PaperClipOutlined style={{ width: "24px", height: "24px" }} />
+          );
+        else return;
+      },
     },
     {
-      title: '发文日期',
-      dataIndex: 'date',
-      key: 'date',
-      align: 'center',
-      width: '116px'
-    }
-  ]
+      title: "发文日期",
+      dataIndex: "date",
+      key: "date",
+      align: "center",
+      width: "116px",
+    },
+  ];
 
   useEffect(() => {
-    DocListReq(DocListRender, doc_type)
-  }, [])
-
+    DocListReq(DocListRender, doc_type);
+  }, []);
 
   function DocListRender(list) {
     for (let i = 0; i < list.length; i++) {
-      let title = [list[i].title, list[i].color, list[i].bold]
-      list[i].title = title
-      list[i].date = list[i].date.slice(0, 10)
-      delete list[i].color
-      delete list[i].bold
+      let title = [list[i].title, list[i].color, list[i].bold];
+      list[i].title = title;
+      list[i].date = list[i].date.slice(0, 10);
+      delete list[i].color;
+      delete list[i].bold;
     }
-    setDocList(list)
+    setDocList(list);
     setTimeout(() => {
-      setLoading(false)
-    }, 500)
-
+      setLoading(false);
+    }, 500);
   }
 
   function GetDocList(e) {
-    setLoading(true)
-    setDocType(e.target.value)
-    DocListReq(DocListRender, e.target.value)
+    setLoading(true);
+    setDocType(e.target.value);
+    DocListReq(DocListRender, e.target.value);
   }
 
   function SerachDoc(value) {
-    DocListReq(DocListRender, doc_type, value)
-    setLoading(true)
+    DocListReq(DocListRender, doc_type, value);
+    setLoading(true);
   }
 
   useEffect(() => {
-    setDocType(doc_type)
-  }, [doc_type])
+    setDocType(doc_type);
+  }, [doc_type]);
 
   useEffect(() => {
-    setDocList(doc_list)
-  }, [doc_list])
-
+    setDocList(doc_list);
+  }, [doc_list]);
 
   return (
     <div className="sp" style={{ width: "1440px" }}>
@@ -128,22 +122,28 @@ function DocList(props) {
             placeholder="输入标题搜索"
             allowClear
             onSearch={SerachDoc}
-            style={{ width: 360, margin: '0 0 0 196px ' }}
+            style={{ width: 360, margin: "0 0 0 196px " }}
           />
         </div>
         <main className="doclist-body">
-          <Table dataSource={doc_list} columns={columns} loading={loading} pagination={{ pageSize: 12 }} onRow={record => {
-            return {
-              onClick: event => {
-                DocClickReq(record.doc_no)
-                props.history.push(`/Doc/Detail/${record.doc_no}`)
-              }, // 点击行
-            };
-          }} />
+          <Table
+            dataSource={doc_list}
+            columns={columns}
+            loading={loading}
+            pagination={{ pageSize: 12 }}
+            onRow={(record) => {
+              return {
+                onClick: (event) => {
+                  DocClickReq(record.doc_no);
+                  props.history.push(`/Doc/Detail/${record.doc_no}`);
+                }, // 点击行
+              };
+            }}
+          />
         </main>
       </div>
     </div>
-  )
+  );
 }
 
-export default DocList
+export default DocList;
