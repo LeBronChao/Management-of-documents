@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var jwt = require('express-jwt')
+const multer = require('multer')
 
 
 var docRouter = require('./routes/doc')
@@ -18,7 +19,6 @@ app.all('*', function (req, res, next) {
   next();
 });
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -27,14 +27,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(multer({ dest: './public/doc_files' }).any())
+
 
 app.use(jwt({
   secret: 'secret12345',
   algorithms: ['HS256']
   // 签名的密钥 或 PublicKey
 }).unless({
-  path: ['/User/Login', '/User/Register']  // 指定路径不经过 Token 解析
+  path: ['/User/Login', '/User/Register', '/public']  // 指定路径不经过 Token 解析
 }))
 
 app.use('/Doc', docRouter)

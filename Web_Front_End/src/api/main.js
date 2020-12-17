@@ -27,7 +27,11 @@ let base = {
   docList: '/Doc/GetList',
   docClick: '/Doc/Click',
   docPub: '/Doc/Pub',
-  detail: '/Doc/Get'
+  docFile: '/Doc/File',
+  detail: '/Doc/Get',
+  exmList: '/Doc/ExmList',
+  docExm: '/Doc/Exm',
+  docDelete: '/Doc/Delete'
 }
 
 export default base;
