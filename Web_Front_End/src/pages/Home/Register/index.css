@@ -8,12 +8,6 @@
     margin: 0 auto 20px auto;
     border-bottom: 2px solid #14579b;
   }
-  .ant-input {
-    width: 385px;
-  }
-  .ant-input-password {
-    width: 385px;
-  }
   #registerBtn {
     display: block;
     margin: 0 auto;

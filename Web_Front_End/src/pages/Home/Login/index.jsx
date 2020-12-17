@@ -14,11 +14,7 @@ function Login(props) {
   const navToHome = function () {
     LoginReq(username, password, nav);
   };
-  const formItemLayout = {
-    wrapperCol: {
-      sm: { offset: 3 },
-    },
-  };
+
   const changeHandler = (e) => {
     e.target.name === "username"
       ? setUsername(e.target.value)
@@ -27,7 +23,7 @@ function Login(props) {
   return (
     <div id="subBox">
       <div id="loginText">登录</div>
-      <Form {...formItemLayout} layout="horizontal">
+      <Form layout="horizontal">
         <Form.Item
           rules={[
             {

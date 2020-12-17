@@ -37,6 +37,7 @@
 
   .ant-form-item-control-input {
     width: 385px;
+    margin: 0 auto;
   }
 }
 
