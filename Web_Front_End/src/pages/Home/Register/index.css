@@ -1,13 +1,6 @@
-#subBox {
-  width: 520px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  background-color: #fff;
-}
 #registerText {
   text-align: center;
-  padding-top: 40px;
+  padding-top: 20px;
   width: 40px;
   font-size: 18px;
   padding-bottom: 18px;
@@ -35,4 +28,13 @@
 }
 #registerBtn:focus {
   outline: none;
+}
+#login_Text {
+  font-size: 12px;
+  margin: 18px auto 0 auto;
+  width: 108px;
+}
+#nl_lg {
+  color: #14579b;
+  text-decoration: none;
 }

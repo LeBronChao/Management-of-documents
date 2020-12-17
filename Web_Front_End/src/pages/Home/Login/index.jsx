@@ -67,7 +67,7 @@ function Login(props) {
           登录
         </button>
       </Form>
-      <p id="rigisterText">
+      <p id="rigister_Text">
         没有账号？
         <NavLink id="nl_rg" to="/Home/Register">
           立即注册
