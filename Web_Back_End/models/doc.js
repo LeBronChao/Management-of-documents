@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     pub_time: DataTypes.DATE,
     click_count: DataTypes.INTEGER,
     file_url: DataTypes.STRING,
+    file_name: DataTypes.STRING,
     exm_status: DataTypes.INTEGER,
     pub_username: DataTypes.STRING,
     exm_username: DataTypes.STRING
@@ -32,3 +33,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Doc;
 };
+
