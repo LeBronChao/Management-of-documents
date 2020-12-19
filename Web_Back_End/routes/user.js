@@ -206,7 +206,7 @@ router.post('/Delete', async function (req, res, next) {
 })
 
 router.post('/Query', async function (req, res, next) {
-  if (req.user.jur == 0) {
+  if (req.user.jur == 3) {
     res.status(403).json({
       errmsg: "权限不足"
     })
@@ -219,7 +219,7 @@ router.post('/Query', async function (req, res, next) {
     if (data.name) where.name = data.name
     if (data.phone) where.phone = data.phone
     if (data.unit) where.unit = data.unit
-    if (req.user.jur == 2 && data.unit) where.unit = req.user.unit
+    if (req.user.jur == 2) where.unit = req.user.unit
 
 
     let UserList = models.User.findAll({

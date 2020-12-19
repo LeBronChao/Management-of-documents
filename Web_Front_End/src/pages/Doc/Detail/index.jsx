@@ -25,7 +25,7 @@ function Detail(props) {
         <div className="detail_msg row">
           <div>
             <PaperClipOutlined />
-            <a href={doc.file_url} style={{ marginLeft: 8 }}>附件:{doc.file_name}</a>
+            <a href={doc.file_url} style={{ marginLeft: 8 }} target="_blank">附件:{doc.file_name}</a>
           </div>
           <div className="detail_click_container cz">
             <EyeOutlined />

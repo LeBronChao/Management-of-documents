@@ -3,21 +3,21 @@
     "username": "root",
     "password": "qzone123",
     "database": "Doc_Management",
-    "host": "127.0.0.1",
+    "host": "39.106.96.41",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "qzone123",
     "database": "Doc_Management",
-    "host": "127.0.0.1",
+    "host": "39.106.96.41",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "qzone123",
     "database": "Doc_Management",
-    "host": "127.0.0.1",
+    "host": "39.106.96.41",
     "dialect": "mysql"
   }
 }

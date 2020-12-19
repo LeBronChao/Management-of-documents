@@ -21,6 +21,9 @@ export function LoginReq(user_no, password, to) {
     } else {
       alert('登录失败' + res.data.errmsg)
     }
+  }).catch((e) => {
+    alert('登录失败')
+    console.log(e)
   })
 }
 
@@ -34,5 +37,8 @@ export function RegisterReq(user_no, password, name, phone, unit, to) {
     } else {
       alert('注册失败' + res.data.errmsg)
     }
+  }).catch((e) => {
+    alert('注册失败')
+    console.log(e)
   })
 }
