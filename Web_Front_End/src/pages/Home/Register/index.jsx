@@ -2,6 +2,7 @@ import "./index.css";
 import { Form, Input, Select } from "antd";
 import { useState } from "react";
 import { RegisterReq } from "../../../api/Home";
+import { NavLink } from "react-router-dom";
 
 function Register(props) {
   const [username, setUsername] = useState();
@@ -11,11 +12,6 @@ function Register(props) {
   const [phoneNumber, setPhoneNumber] = useState();
   const [department, setDepartment] = useState();
   const { Option } = Select;
-  const formItemLayout = {
-    wrapperCol: {
-      sm: { offset: 3 },
-    },
-  };
   function nav() {
     props.history.push("/Home/Login");
   }
@@ -47,7 +43,7 @@ function Register(props) {
   return (
     <div id="subBox">
       <div id="registerText">注册</div>
-      <Form {...formItemLayout} layout="horizontal">
+      <Form layout="horizontal">
         <Form.Item
           name="username"
           rules={[
@@ -207,6 +203,12 @@ function Register(props) {
       <button id="registerBtn" onClick={navToLogin}>
         注册
       </button>
+      <p id="login_Text">
+        已有账号？
+        <NavLink id="nl_lg" to="/Home/Login">
+          立即登陆
+        </NavLink>
+      </p>
     </div>
   );
 }

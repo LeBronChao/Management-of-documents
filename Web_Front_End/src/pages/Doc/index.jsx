@@ -1,4 +1,3 @@
-
 import { NavLink, Switch, Route, Redirect } from 'react-router-dom'
 import DocList from './DocList'
 import DocPub from './DocPub';

@@ -3,22 +3,18 @@ import { Form, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./index.css";
 import { useState } from "react";
-import { LoginReq } from '../../../api/Home'
+import { LoginReq } from "../../../api/Home";
 
 function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   function nav() {
-    props.history.push("/Doc")
+    props.history.push("/Doc");
   }
   const navToHome = function () {
-    LoginReq(username, password, nav)
+    LoginReq(username, password, nav);
   };
-  const formItemLayout = {
-    wrapperCol: {
-      sm: { offset: 3 },
-    },
-  };
+
   const changeHandler = (e) => {
     e.target.name === "username"
       ? setUsername(e.target.value)
@@ -27,7 +23,7 @@ function Login(props) {
   return (
     <div id="subBox">
       <div id="loginText">登录</div>
-      <Form {...formItemLayout} layout="horizontal">
+      <Form layout="horizontal">
         <Form.Item
           rules={[
             {
@@ -63,11 +59,11 @@ function Login(props) {
             size="large"
           />
         </Form.Item>
-        <button id="loginBtn" onClick={navToHome}>
-          登录
-        </button>
       </Form>
-      <p id="rigisterText">
+      <button id="loginBtn" onClick={navToHome}>
+        登录
+      </button>
+      <p id="rigister_Text">
         没有账号？
         <NavLink id="nl_rg" to="/Home/Register">
           立即注册
