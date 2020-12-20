@@ -10,13 +10,13 @@ function Register(props) {
   const [confirm, setConfirm] = useState();
   const [name, setName] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
-  const [department, setDepartment] = useState();
+  const [unit, setunit] = useState();
   const { Option } = Select;
   function nav() {
     props.history.push("/Home/Login");
   }
   const navToLogin = () => {
-    RegisterReq(username, password, name, phoneNumber, department, nav);
+    RegisterReq(username, password, name, phoneNumber, unit, nav);
   };
 
   const changeHandler = (e) => {
@@ -149,7 +149,7 @@ function Register(props) {
           />
         </Form.Item>
         <Form.Item
-          name="department"
+          name="unit"
           rules={[
             {
               required: true,
@@ -158,12 +158,12 @@ function Register(props) {
           ]}
         >
           <Select
-            name="department"
+            name="unit"
             placeholder="单位/学院"
             onSelect={(value) => {
-              setDepartment(value);
+              setunit(value);
             }}
-            value={department}
+            value={unit}
           >
             <Option value="大数据与互联网学院">大数据与互联网学院</Option>
             <Option value="中德智能制造学院">中德智能制造学院</Option>
