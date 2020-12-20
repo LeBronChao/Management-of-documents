@@ -7,7 +7,8 @@ var upload = multer({ dest: '../public/doc_files' }) // 文件储存路径
 var fs = require('fs')
 var pathLib = require('path')
 
-let ip = "http://10.118.21.172:3001/"
+let ip = "http://39.106.96.41:3001/"
+//let ip = "http://39.106.96.14:3001/"
 
 router.post('/GetList', async function (req, res, next) {
   let where = {
@@ -25,7 +26,8 @@ router.post('/GetList', async function (req, res, next) {
   }
   let Doc_List = await models.Doc.findAll({
     where: where,
-    include: [models.Doc_Title]
+    include: [models.Doc_Title],
+    order: [['id', 'DESC']]
   })
   let Doc = []
   Doc_List.forEach((value) => {
@@ -48,6 +50,7 @@ router.post('/GetList', async function (req, res, next) {
 
 router.post('/Pub', async function (req, res, next) {
 
+
   let data = req.body
   let index = models.Doc.findOne()
   if (!index)
@@ -69,16 +72,18 @@ router.post('/Pub', async function (req, res, next) {
     createdAt: new Date(),
     updatedAt: new Date()
   })
-  let filename = "public/doc_files/" + doc.id + "_" + data.file_name + data.houzhui
-  fs.rename(data.file_path, filename, function (err) {
-    if (err) {
-      res.json({ status: false, errmsg: "发布失败" })
-      doc.destory()
-      return
-    } else {
-      doc.update({ file_url: ip + filename })
-    }
-  })
+  if (data.file_path) {
+    let filename = "public/doc_files/" + doc.id + "_" + data.file_name
+    fs.rename(data.file_path, filename, function (err) {
+      if (err) {
+        res.json({ status: false, errmsg: "发布失败" })
+        doc.destory()
+        return
+      } else {
+        doc.update({ file_url: ip + filename })
+      }
+    })
+  }
   await models.Doc_Title.create({
     id: index.id + 1,
     DocId: doc.id,
@@ -140,7 +145,8 @@ router.post('/ExmList', async function (req, res, next) {
   }
   let Doc_List = await models.Doc.findAll({
     where: where,
-    include: [models.Doc_Title]
+    include: [models.Doc_Title],
+    order: [['id', 'DESC']]
   })
   let Doc = []
   Doc_List.forEach((value) => {
@@ -161,6 +167,12 @@ router.post('/ExmList', async function (req, res, next) {
 })
 
 router.post('/Exm', async function (req, res, next) {
+  if (req.user.jur >= 2) {
+    res.status(403).json({
+      status: false,
+      errmsg: "权限不足",
+    })
+  }
   try {
     let doc = await models.Doc.findByPk(req.body.doc_no)
     doc.update({
@@ -179,12 +191,29 @@ router.post('/Exm', async function (req, res, next) {
 })
 
 router.post('/Delete', async function (req, res, next) {
-
+  if (req.user.jur == 3)
+    res.status(403).json({
+      status: false,
+      errmsg: "权限不足",
+    })
   try {
     let doc = await models.Doc.findByPk(req.body.doc_no)
     let doc_title = await models.Doc_Title.findOne({
-      DocId: req.body.doc_no
+      where: {
+        DocId: req.body.doc_no
+      }
     })
+    if (doc.file_url) {
+      let filename = doc.file_url.slice(26)
+      fs.unlink(filename, function (err) {
+        if (err) {
+          res.status(500).json({
+            status: false,
+            errmsg: "操作失败"
+          })
+        }
+      })
+    }
     await doc.destroy()
     await doc_title.destroy()
     res.status(200).json({

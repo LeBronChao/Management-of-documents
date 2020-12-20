@@ -22,6 +22,7 @@ export function DocExmReq(doc_no, status, nav) {
       nav()
     }
   }).catch((e) => {
+    alert('操作失败！')
     console.log(e);
   })
 }
@@ -34,6 +35,7 @@ export function DocDeleteReq(doc_no, nav) {
       nav()
     }
   }).catch((e) => {
+    alert('操作失败！')
     console.log(e);
   })
 }

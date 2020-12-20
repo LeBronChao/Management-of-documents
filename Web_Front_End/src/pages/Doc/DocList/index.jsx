@@ -38,11 +38,13 @@ function DocList(props) {
       align: "center",
       width: "514px",
       render: (value) => {
-        let styleObj = {};
-        styleObj.color = value[1] ? "red" : "black";
-        styleObj.fontWeight = value[2] ? 700 : 400;
-        return <div style={styleObj}>{value[0]}</div>;
-      },
+        let styleObj = {}
+        styleObj.color = value[1] == 1 ? "red" : "black"
+        styleObj.fontWeight = value[2] ? 700 : 400
+        return (
+          <div style={styleObj}>{value[0]}</div>
+        )
+      }
     },
     {
       title: "附件",

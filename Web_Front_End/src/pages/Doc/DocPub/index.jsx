@@ -67,8 +67,11 @@ function DocPub() {
     if (bool) {
       alert(str)
     } else {
-      let file = new FormData()
-      file.append('avatar', doc_file.current.files[0])
+      let file
+      if (doc_file.current.files[0]) {
+        file = new FormData()
+        file.append('avatar', doc_file.current.files[0])
+      }
       DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, file, file_name, init)
     }
   }

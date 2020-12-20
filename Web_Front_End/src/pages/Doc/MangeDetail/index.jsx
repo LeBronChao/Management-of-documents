@@ -31,7 +31,7 @@ function Detail(props) {
         <div className="detail_msg row">
           <div>
             <PaperClipOutlined />
-            <a href={doc.file_url} style={{ marginLeft: 8 }}>附件:{doc.file_name}</a>
+            <a href={doc.file_url} style={{ marginLeft: 8 }} target="_blank">附件:{doc.file_name}</a>
           </div>
           <div className="detail_click_container cz">
             <EyeOutlined />
@@ -53,7 +53,7 @@ function Detail(props) {
             onClick={() => { DocExmReq(doc_no, 2, nav) }}
           >审批不通过</Button>
           <Button
-            style={{ background: "red", color: "white" }}
+            style={{ background: "red", color: "white", border: "red" }}
             size="large"
             className="detail_btn"
             shape="round"

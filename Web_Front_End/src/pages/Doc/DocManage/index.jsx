@@ -39,7 +39,7 @@ function DocManage(props) {
       width: '510px',
       render: (value) => {
         let styleObj = {}
-        styleObj.color = value[1] ? "red" : "black"
+        styleObj.color = value[1] == 1 ? "red" : "black"
         styleObj.fontWeight = value[2] ? 700 : 400
         return (
           <div style={styleObj}>{value[0]}</div>
@@ -56,13 +56,10 @@ function DocManage(props) {
         switch (status) {
           case 0:
             return <div style={{ color: '' }}>未审批</div>
-            break;
           case 1:
             return <div style={{ color: '#4CF140' }}>审批通过</div>
-            break;
           case 2:
             return <div style={{ color: 'red' }}>审批不通过</div>
-            break;
         }
       }
     },
