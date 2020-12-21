@@ -134,13 +134,19 @@ function DocManage(props) {
           />
         </div>
         <main className="doclist-body">
-          <Table dataSource={doc_list} columns={columns} loading={loading} pagination={{ pageSize: 12 }} onRow={record => {
-            return {
-              onClick: event => {
-                props.history.push(`/Doc/ManageDetail/${record.doc_no}`)
-              }, // 点击行
-            };
-          }} />
+          <Table
+            dataSource={doc_list}
+            columns={columns}
+            loading={loading}
+            pagination={{ pageSize: 12 }}
+            rowKey={(col) => col.doc_no}
+            onRow={record => {
+              return {
+                onClick: event => {
+                  props.history.push(`/Doc/ManageDetail/${record.doc_no}`)
+                }, // 点击行
+              };
+            }} />
         </main>
       </div>
     </div>

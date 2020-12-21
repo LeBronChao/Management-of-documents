@@ -122,11 +122,11 @@ router.get('/GetList', async function (req, res, next) {
     UserList.forEach(value => {
       User.push({
         user_no: value.user_no,
-        reg_date: value.createAt,
+        reg_date: value.createdAt,
         name: value.name,
         phone: value.phone,
         unit: value.unit,
-        jur: value.unit
+        jur: value.jur
       })
     })
     res.status(200).json({
