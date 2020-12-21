@@ -34,6 +34,9 @@ let base = {
   exmList: "/Doc/ExmList",
   docExm: "/Doc/Exm",
   docDelete: "/Doc/Delete",
+  userDelete: "/User/Delete",
+  userList: "/User/GetList",
+  UserUpdate: "/User/Update",
 };
 
 export default base;
