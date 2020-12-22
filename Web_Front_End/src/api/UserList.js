@@ -12,12 +12,13 @@ export function UserListReq(render) {
     });
 }
 export function UserDeleteReq(user_no) {
-  let data = { user_no };
   axios
-    .post(base.userDelete, data)
+    .post(base.userDelete, user_no)
     .then((res) => {
       if (res.data.status) {
         alert("操作成功！");
+      } else {
+        alert(res.data.errmsg);
       }
     })
     .catch((e) => {
@@ -27,9 +28,8 @@ export function UserDeleteReq(user_no) {
 }
 
 export function UserUpdate(user_no) {
-  let data = { user_no };
   axios
-    .post(base.userUpdate, data)
+    .post(base.userUpdate, user_no)
     .then((res) => {
       if (res.data.status) {
         alert("操作成功！");

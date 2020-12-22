@@ -153,19 +153,21 @@ function UserManage(props) {
     {
       title: "操作",
       key: "action",
-      dataIndex: "action",
       align: "center",
-      render: (target) => (
-        <Button
-          danger
-          onClick={() => {
-            UserDeleteReq(target.user_no);
-            UserListReq(UserListRender);
-          }}
-        >
-          删除
-        </Button>
-      ),
+      render: (target) => {
+        console.log(target);
+        return (
+          <Button
+            danger
+            onClick={() => {
+              UserDeleteReq(target.user_no);
+              UserListReq(UserListRender);
+            }}
+          >
+            删除
+          </Button>
+        );
+      },
     },
   ];
 
