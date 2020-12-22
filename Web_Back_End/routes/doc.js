@@ -67,8 +67,8 @@ router.post('/Pub', async function (req, res, next) {
     file_url: "",
     file_name: data.file_name,
     exm_status: 0,
-    pub_username: "LeBronChao",
-    exm_username: "LeBronChao",
+    pub_username: req.user.user_no,
+    exm_username: "",
     createdAt: new Date(),
     updatedAt: new Date()
   })
@@ -176,7 +176,8 @@ router.post('/Exm', async function (req, res, next) {
   try {
     let doc = await models.Doc.findByPk(req.body.doc_no)
     doc.update({
-      exm_status: req.body.status
+      exm_status: req.body.status,
+      exm_username: req.user.user_no
     })
     res.status(200).json({
       status: true,

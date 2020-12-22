@@ -1,24 +1,21 @@
-import { Table, Input, Menu, Dropdown, Select, Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Table, Input, Select, Button } from "antd";
 import { useState, useEffect } from "react";
 import "./index.css";
-import { UserDeleteReq, UserListReq } from "../../../api/UserList";
-import { Switch } from "react-router-dom";
+import {
+  UserDeleteReq,
+  UserListReq,
+  UnitQueryReq,
+  NameQueryReq,
+} from "../../../api/UserList";
+import EditInfo from "../../../components/Doc/UserManage/EditInfo";
 const { Option } = Select;
 const { Search } = Input;
 
 function UserManage(props) {
-  let that = this;
   let [loading, setLoading] = useState(true);
   let [user_list, setUserList] = useState([]);
-  const jur_menu = (
-    <Menu>
-      <Menu.Item key="0">超级管理员</Menu.Item>
-      <Menu.Item key="1">总管理员</Menu.Item>
-      <Menu.Item key="2">部门用户</Menu.Item>
-      <Menu.Item key="3">普通用户</Menu.Item>
-    </Menu>
-  );
+  let [visible, setVisible] = useState(false);
+  let [user_data, setUserData] = useState();
 
   const columns = [
     {
@@ -34,43 +31,6 @@ function UserManage(props) {
       dataIndex: "unit",
       align: "center",
       width: "210px",
-      render: (unit) => (
-        <Select
-          name="unit"
-          placeholder={unit}
-          value={unit}
-          style={{ width: "168px" }}
-        >
-          <Option value="大数据与互联网学院">大数据与互联网学院</Option>
-          <Option value="中德智能制造学院">中德智能制造学院</Option>
-          <Option value="创意与设计学院">创意与设计学院</Option>
-          <Option value="健康与环境工程学院">健康与环境工程学院</Option>
-          <Option value="新能源与新材料学院">新能源与新材料学院</Option>
-          <Option value="城市交通与物流学院">城市交通与物流学院</Option>
-          <Option value="商学院">商学院</Option>
-          <Option value="药学院">药学院</Option>
-          <Option value="体育与艺术学院">体育与艺术学院</Option>
-          <Option value="质量与标准学院">质量与标准学院</Option>
-          <Option value="工程物理学院">工程物理学院</Option>
-          <Option value="研究生院">研究生院</Option>
-          <Option value="党委组织部">党委组织部</Option>
-          <Option value="党委宣传部">党委宣传部</Option>
-          <Option value="党政办公室">党政办公室</Option>
-          <Option value="科研与校企合作部">科研与校企合作部</Option>
-          <Option value="国际合作与学生工作部">国际合作与学生工作部</Option>
-          <Option value="采购与招投标管理中心">采购与招投标管理中心</Option>
-          <Option value="信息中心">信息中心</Option>
-          <Option value="校医院">校医院</Option>
-          <Option value="创业创客与就业指导中心">创业创客与就业指导中心</Option>
-          <Option value="国有资产与实验室管理部">国有资产与实验室管理部</Option>
-          <Option value="教务部">教务部</Option>
-          <Option value="计划财务部">计划财务部</Option>
-          <Option value="图书馆">图书馆</Option>
-          <Option value="安全保卫中心">安全保卫中心</Option>
-          <Option value="后勤保障部<">后勤保障部</Option>
-          <Option value="校团委">校团委</Option>
-        </Select>
-      ),
     },
     {
       title: "姓名",
@@ -78,7 +38,6 @@ function UserManage(props) {
       dataIndex: "name",
       align: "center",
       width: "80px",
-      render: (name) => <Input value={name} bordered={false} />,
     },
     {
       title: "手机号",
@@ -86,16 +45,13 @@ function UserManage(props) {
       dataIndex: "phone",
       align: "center",
       width: "120px",
-      render: (phone) => (
-        <Input style={{ width: "85px" }} value={phone} bordered={false} />
-      ),
     },
     {
       title: "权限",
       key: "jur",
       dataIndex: "jur",
       align: "center",
-      render: (jur) => {
+      render: (jur, record) => {
         let str_jur;
         switch (jur) {
           case 0:
@@ -105,7 +61,7 @@ function UserManage(props) {
             str_jur = "总管理员";
             break;
           case 2:
-            str_jur = "部门用户";
+            str_jur = "部门管理员";
             break;
           case 3:
             str_jur = "普通用户";
@@ -114,17 +70,7 @@ function UserManage(props) {
             break;
         }
 
-        return (
-          <Dropdown overlay={jur_menu} trigger={["click"]}>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              {str_jur}
-              <DownOutlined />
-            </a>
-          </Dropdown>
-        );
+        return str_jur;
       },
     },
     {
@@ -154,18 +100,28 @@ function UserManage(props) {
       title: "操作",
       key: "action",
       align: "center",
-      render: (target) => {
-        console.log(target);
+      render: (target, record) => {
         return (
-          <Button
-            danger
-            onClick={() => {
-              UserDeleteReq(target.user_no);
-              UserListReq(UserListRender);
-            }}
-          >
-            删除
-          </Button>
+          <div>
+            <Button
+              style={{ color: "#1890ff", borderColor: "#1890ff" }}
+              onClick={() => {
+                setVisible(true);
+                setUserData(record);
+              }}
+            >
+              编辑
+            </Button>{" "}
+            <Button
+              danger
+              onClick={() => {
+                UserDeleteReq(target.user_no);
+                UserListReq(UserListRender);
+              }}
+            >
+              删除
+            </Button>
+          </div>
         );
       },
     },
@@ -173,13 +129,17 @@ function UserManage(props) {
 
   useEffect(() => {
     UserListReq(UserListRender);
+    return () => {
+      UserListReq(UserListRender);
+    };
   }, []);
 
   function SearchUser(userName) {
-    console.log(userName);
+    NameQueryReq(UserListRender, userName);
   }
 
   function UserListRender(list) {
+    console.log(list);
     setUserList(list);
     setTimeout(() => {
       setLoading(false);
@@ -197,7 +157,10 @@ function UserManage(props) {
         />
         <Select
           name="unit"
-          placeholder="按单位筛选"
+          placeholder="按部门筛选"
+          onSelect={(unit) => {
+            UnitQueryReq(UserListRender, unit);
+          }}
           style={{ width: "200px", marginLeft: "50px" }}
         >
           <Option value="大数据与互联网学院" key="0">
@@ -294,6 +257,15 @@ function UserManage(props) {
             rowKey={(columns) => columns.user_no}
           />
         </main>
+        <EditInfo
+          style={{ position: "absolute" }}
+          visible={visible}
+          changeVisible={(visible) => setVisible(visible)}
+          userData={user_data}
+          reflash={() => {
+            window.location.reload();
+          }}
+        />
       </div>
     </div>
   );

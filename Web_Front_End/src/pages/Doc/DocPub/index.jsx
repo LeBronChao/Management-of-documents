@@ -9,6 +9,7 @@ const { Option } = Select
 
 
 function DocPub() {
+  let user = JSON.parse(sessionStorage.getItem('sztu_doc_user'))
   const [doc_type, setdoc_type] = useState("")
   const [title, settitle] = useState("")
   const [if_red, setif_red] = useState(false)
@@ -16,8 +17,9 @@ function DocPub() {
   const [text_state, settext_state] = useState(BraftEditor.createEditorState(null))
   const [text, settext] = useState("")
   const [text_html, settext_html] = useState("")
-  const [unit, setunit] = useState("")
+  const [unit, setunit] = useState(user.unit)
   const [file_name, setfile_name] = useState("")
+  const [unit_disable, setunit_disable] = useState(user.jur >= 2 ? true : false)
 
   const text_ref = useRef()
   const doc_file = useRef()
@@ -110,7 +112,7 @@ function DocPub() {
           </div>
           <div className="doc-pub-table-row1 row cz" style={{ zIndex: 6 }}>
             <div className="doc-pub-table-title" style={{ marginLeft: 32 }}>发文部门</div>
-            <Select defaultValue="" style={{ width: 200 }} allowClear value={unit} onChange={(val) => { setunit(val) }}>
+            <Select defaultValue="" style={{ width: 200 }} allowClear value={unit} onChange={(val) => { setunit(val) }} disabled={unit_disable}>
               <Option value="大数据与互联网学院">大数据与互联网学院</Option>
               <Option value="中德智能制造学院">中德智能制造学院</Option>
               <Option value="创意与设计学院">创意与设计学院</Option>

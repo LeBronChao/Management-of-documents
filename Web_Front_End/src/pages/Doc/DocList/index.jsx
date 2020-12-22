@@ -131,6 +131,7 @@ function DocList(props) {
             columns={columns}
             loading={loading}
             pagination={{ pageSize: 12 }}
+            rowKey={(col) => col.doc_no}
             onRow={(record) => {
               return {
                 onClick: (event) => {
