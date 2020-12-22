@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const PROTOCOL = "http";
-const ADDRESS = "39.106.96.41";
+// const ADDRESS = "39.106.96.41";
+const ADDRESS = "localhost";
 const PORT = 3001;
 
 let baseUrl = PROTOCOL + "://" + ADDRESS + ":" + PORT;
@@ -19,6 +20,18 @@ axios.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
+  }
+);
+axios.interceptors.response.use(
+  (res) => {
+    return res
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      alert('登录超时，请重新登陆')
+      window.location.href = '/Home/Login'
+    }
+    return Promise.reject(error)
   }
 );
 

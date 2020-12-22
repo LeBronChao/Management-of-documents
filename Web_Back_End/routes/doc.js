@@ -46,11 +46,10 @@ router.post('/GetList', async function (req, res, next) {
     })
   })
   res.status(200).json({ Doc: Doc })
+  return
 })
 
 router.post('/Pub', async function (req, res, next) {
-
-
   let data = req.body
   let index = models.Doc.findOne()
   if (!index)
@@ -67,7 +66,7 @@ router.post('/Pub', async function (req, res, next) {
     file_url: "",
     file_name: data.file_name,
     exm_status: 0,
-    pub_username: req.user.user_no,
+    pub_username: req.user.dataValues.user_no,
     exm_username: "",
     createdAt: new Date(),
     updatedAt: new Date()
@@ -97,6 +96,7 @@ router.post('/Pub', async function (req, res, next) {
     status: true,
     errmsg: ""
   })
+  return
 })
 
 router.post('/File', upload.single('avatar'), async function (req, res, next) {
@@ -106,8 +106,10 @@ router.post('/File', upload.single('avatar'), async function (req, res, next) {
   fs.rename(req.files[0].path, filename, function (err) {
     if (err) {
       res.json({ status: false })
+      return
     } else {
       res.json({ status: true, file_path: filename, houzhui: pathLib.parse(req.files[0].originalname).ext })
+      return
     }
   })
 })
@@ -121,14 +123,22 @@ router.post('/Click', async function (req, res, next) {
     status: true,
     errmsg: ''
   })
+  return
 })
 
 router.post('/Get', async function (req, res, next) {
   let doc = await models.Doc.findByPk(req.body.doc_no)
   res.status(200).json(doc)
+  return
 })
 
 router.post('/ExmList', async function (req, res, next) {
+  if (req.user.dataValues.jur == 3) {
+    res.status(403).json({
+      errmsg: "权限不足"
+    })
+    return
+  }
   let where = {}
   if (req.body.type != '全部信息') {
     where.type = {
@@ -140,8 +150,8 @@ router.post('/ExmList', async function (req, res, next) {
       [Op.like]: "%" + req.body.title + "%"
     }
   }
-  if (req.user.jur == 2) {
-    where.unit = req.user.unit
+  if (req.user.dataValues.jur == 2) {
+    where.unit = req.user.dataValues.unit
   }
   let Doc_List = await models.Doc.findAll({
     where: where,
@@ -164,39 +174,45 @@ router.post('/ExmList', async function (req, res, next) {
     })
   })
   res.status(200).json({ Doc: Doc })
+  return
 })
 
 router.post('/Exm', async function (req, res, next) {
-  if (req.user.jur >= 2) {
+  if (req.user.dataValues.jur >= 2) {
     res.status(403).json({
       status: false,
       errmsg: "权限不足",
     })
+    return
   }
   try {
     let doc = await models.Doc.findByPk(req.body.doc_no)
     doc.update({
       exm_status: req.body.status,
-      exm_username: req.user.user_no
+      exm_username: req.user.dataValues.user_no
     })
     res.status(200).json({
       status: true,
       errmsg: ""
     })
+    return
   } catch (e) {
     res.status(500).json({
       status: false,
       errmsg: "操作失败"
     })
+    return
   }
 })
 
 router.post('/Delete', async function (req, res, next) {
-  if (req.user.jur == 3)
+  if (req.user.jur == 3) {
     res.status(403).json({
       status: false,
       errmsg: "权限不足",
     })
+    return
+  }
   try {
     let doc = await models.Doc.findByPk(req.body.doc_no)
     let doc_title = await models.Doc_Title.findOne({
@@ -221,11 +237,13 @@ router.post('/Delete', async function (req, res, next) {
       status: true,
       errmsg: ""
     })
+    return
   } catch (e) {
     res.status(500).json({
       status: false,
       errmsg: "操作失败"
     })
+    return
   }
 
 

@@ -17,12 +17,14 @@ router.post('/Login', async function (req, res, next) {
       status: false,
       errmsg: "用户不存在"
     })
+    return
   }
   else if (md5(req.body.password) != user.password) {
     res.status(400).json({
       status: false,
       errmsg: "密码错误"
     })
+    return
   } else {
     // 注意默认情况 Token 必须以 Bearer+空格 开头
     const token = 'Bearer ' + jwt.sign(
@@ -45,6 +47,7 @@ router.post('/Login', async function (req, res, next) {
       errmsg: "",
       token: token
     })
+    return
   }
 
 })
@@ -79,6 +82,7 @@ router.post('/Register', async function (req, res, next) {
       status: false,
       errmsg: errmsg
     })
+    return
   } else {
     await models.User.create({
       user_no: data.user_no,
@@ -95,26 +99,31 @@ router.post('/Register', async function (req, res, next) {
       status: true,
       errmsg: ""
     })
+    return
   }
 })
 
 router.get('/GetList', async function (req, res, next) {
-  if (req.user.jur == 3) {
+  if (req.user.dataValues.jur == 3) {
     res.status(403).json({
       msg: "权限不足"
     })
+    return
   } else {
     let where = {}
     let User = []
-    switch (req.user.jur) {
+    switch (req.user.dataValues.jur) {
       case 0, 1:
         where = {}
         break;
       case 2:
         where = {
-          unit: req.user.unit
+          unit: req.user.dataValues.unit
         }
         break;
+    }
+    where.jur = {
+      [Op.gte]: req.user.dataValues.jur
     }
     let UserList = await models.User.findAll({
       where
@@ -132,20 +141,25 @@ router.get('/GetList', async function (req, res, next) {
     res.status(200).json({
       User: User
     })
+    return
   }
 
 })
 
 router.post('/Update', async function (req, res, next) {
-  if (req.user.jur == 3) {
+  if (req.user.dataValues.jur == 3) {
     res.status(403).json({
       errmsg: "权限不足"
     })
+    return
   }
   let data = req.body
   let user = await models.User.findOne({
     where: {
-      user_no: req.body.user_no
+      user_no: req.body.user_no,
+      jur: {
+        [Op.gte]: req.user.dataValues.jur
+      }
     }
   })
   if (user) {
@@ -153,73 +167,95 @@ router.post('/Update', async function (req, res, next) {
       name: data.name,
       phone: data.phone,
       unit: data.unit,
+      jur: data.jur,
     })
-    if (req.user.jur == 0) {
+    if (data.password) {
       await user.update({
-        jur: data.jur
+        password: md5(data.password)
       })
     }
     res.status(200).json({
       status: true,
       errmsg: ""
     })
+    return
   } else {
     res.status(400).json({
       errmsg: "用户不存在"
     })
+    return
   }
 })
 
 router.post('/Delete', async function (req, res, next) {
-  if (req.user.jur >= 3) {
+  if (req.user.dataValues.jur >= 3) {
     res.status(403).json({
       status: false,
       errmsg: "权限不足 无法删除成员"
     })
+    return
   } else {
     let user = await models.User.findOne({
       where: {
-        user_no: req.body.user_no
+        user_no: req.body.user_no,
+        jur: {
+          [Op.gte]: req.user.dataValues.jur
+        }
       }
     })
-    if (req.user.jur <= 1) {
+    if (req.user.dataValues.jur <= 1) {
       await user.destroy()
       res.status.json({
         status: true,
         errmsg: ""
       })
     } else {
-      if (req.user.unit = user.unit) {
+      if (req.user.dataValues.unit = user.unit) {
         await user.destroy()
         res.status.json({
           status: true,
           errmsg: ""
         })
+        return
       } else {
         res.status(403).json({
           status: false,
           errmsg: "权限不足 无法删除其他部门成员"
         })
+        return
       }
     }
   }
 })
 
 router.post('/Query', async function (req, res, next) {
-  if (req.user.jur == 3) {
+  if (req.user.dataValues.jur == 3) {
     res.status(403).json({
       errmsg: "权限不足"
     })
+    return
   } else {
     let where = {}
     let data = req.body
     let User = []
-
-    if (data.user_no) where.user_no = data.user_no
-    if (data.name) where.name = data.name
-    if (data.phone) where.phone = data.phone
-    if (data.unit) where.unit = data.unit
-    if (req.user.jur == 2) where.unit = req.user.unit
+    where.jur = {
+      [Op.gte]: req.user.dataValues.jur
+    }
+    if (data.user_no) where.user_no = {
+      [Op.like]: '%' + data.user_no + '%'
+    }
+    if (data.name) where.name = {
+      [Op.like]: '%' + data.name + '%'
+    }
+    if (data.phone) where.phone = {
+      [Op.like]: '%' + data.phone + '%'
+    }
+    if (data.unit) where.unit = {
+      [Op.eq]: '%' + data.unit + '%'
+    }
+    if (req.user.jur == 2) where.unit = {
+      [Op.eq]: '%' + req.user.dataValues.unit + '%'
+    }
 
 
     let UserList = models.User.findAll({
@@ -238,6 +274,7 @@ router.post('/Query', async function (req, res, next) {
     res.status(200).json({
       User: User
     })
+    return
   }
 })
 
