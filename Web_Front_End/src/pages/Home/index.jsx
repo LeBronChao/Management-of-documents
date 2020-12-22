@@ -8,10 +8,10 @@ function Home() {
   return (
     <div id="bg">
       <div id="mainBox">
-        {/* <div id="banner">
+        <div id="banner">
           <img id="schoolLogo" src={logo} alt="" />
           <span>深圳技术大学公文通</span>
-        </div> */}
+        </div>
         <img id="img1034" src={img1034} alt="" />
         <Switch>
           <Route path="/Home/Login" component={Login}></Route>

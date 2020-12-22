@@ -13,6 +13,7 @@
   }
   #mainBox {
     display: flex;
+    position: relative;
     margin: auto;
     width: 1000px;
     height: 550px;
@@ -20,9 +21,9 @@
   }
   #banner {
     position: absolute;
+    top: -50px;
     left: 0;
-    top: -70px;
-    height: 48px;
+    color: #00579a;
   }
   #banner img {
     display: block;
