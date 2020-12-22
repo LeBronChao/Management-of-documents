@@ -10,8 +10,12 @@ function Detail(props) {
   let params = useParams()
   let doc_no = params.doc_no
   let [doc, setdoc] = useState({})
+  let [exm_show, setexm_show] = useState('none')
+  let user = JSON.parse(sessionStorage.getItem('sztu_doc_user'))
   useEffect(() => {
     DocDetailReq(doc_no, setdoc)
+    if (user.jur <= 1)
+      setexm_show('flex')
   }, [])
 
   function nav() {
@@ -40,7 +44,7 @@ function Detail(props) {
         </div>
         <div className="sp" style={{ marginBottom: 30 }}>
           <Button
-            style={{ background: "#1990FF", color: "white" }}
+            style={{ background: "#1990FF", color: "white", display: exm_show }}
             size="large"
             className="detail_btn"
             shape="round"
@@ -51,6 +55,7 @@ function Detail(props) {
             className="detail_btn detail_btn2"
             shape="round"
             onClick={() => { DocExmReq(doc_no, 2, nav) }}
+            style={{ display: exm_show }}
           >审批不通过</Button>
           <Button
             style={{ background: "red", color: "white", border: "red" }}

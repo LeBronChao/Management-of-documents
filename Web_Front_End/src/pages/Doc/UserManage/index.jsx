@@ -3,12 +3,10 @@ import { DownOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import "./index.css";
 import { UserDeleteReq, UserListReq } from "../../../api/UserList";
-import { Switch } from "react-router-dom";
 const { Option } = Select;
 const { Search } = Input;
 
 function UserManage(props) {
-  let that = this;
   let [loading, setLoading] = useState(true);
   let [user_list, setUserList] = useState([]);
   const jur_menu = (

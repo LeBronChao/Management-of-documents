@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const PROTOCOL = "http";
-//const ADDRESS = '10.161.3.238'
 const ADDRESS = "39.106.96.41";
 const PORT = 3001;
 
