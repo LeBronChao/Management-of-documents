@@ -4,8 +4,7 @@ import "./index.css";
 import {
   UserDeleteReq,
   UserListReq,
-  UnitQueryReq,
-  NameQueryReq,
+  UserQueryReq,
 } from "../../../api/UserList";
 import EditInfo from "../../../components/Doc/UserManage/EditInfo";
 const { Option } = Select;
@@ -16,6 +15,8 @@ function UserManage(props) {
   let [user_list, setUserList] = useState([]);
   let [visible, setVisible] = useState(false);
   let [user_data, setUserData] = useState();
+  let [unit, setUnit] = useState();
+  let [userName, setUserName] = useState();
 
   const columns = [
     {
@@ -37,7 +38,7 @@ function UserManage(props) {
       key: "name",
       dataIndex: "name",
       align: "center",
-      width: "80px",
+      width: "100px",
     },
     {
       title: "手机号",
@@ -116,7 +117,6 @@ function UserManage(props) {
               danger
               onClick={() => {
                 UserDeleteReq(target.user_no);
-                UserListReq(UserListRender);
               }}
             >
               删除
@@ -134,14 +134,14 @@ function UserManage(props) {
     };
   }, []);
 
-  function SearchUser(userName) {
-    NameQueryReq(UserListRender, userName);
-  }
+  useEffect(() => {
+    UserQueryReq(UserListRender, unit, userName);
+  }, [unit, userName]);
 
   function UserListRender(list) {
     console.log(list);
-    setUserList(list);
     setTimeout(() => {
+      setUserList(list);
       setLoading(false);
     }, 500);
   }
@@ -152,14 +152,19 @@ function UserManage(props) {
         <Search
           placeholder="输入姓名搜索"
           allowClear
-          onSearch={SearchUser}
+          value={userName}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
           style={{ width: "360px" }}
         />
         <Select
           name="unit"
           placeholder="按部门筛选"
-          onSelect={(unit) => {
-            UnitQueryReq(UserListRender, unit);
+          allowClear="true"
+          value={unit}
+          onChange={(value) => {
+            setUnit(value);
           }}
           style={{ width: "200px", marginLeft: "50px" }}
         >
@@ -262,9 +267,6 @@ function UserManage(props) {
           visible={visible}
           changeVisible={(visible) => setVisible(visible)}
           userData={user_data}
-          reflash={() => {
-            window.location.reload();
-          }}
         />
       </div>
     </div>
