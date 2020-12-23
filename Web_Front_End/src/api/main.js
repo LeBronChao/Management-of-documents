@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const PROTOCOL = "http";
-// const ADDRESS = "39.106.96.41";
-const ADDRESS = "localhost";
+const ADDRESS = "39.106.96.41";
+//const ADDRESS = "localhost";
 const PORT = 3001;
 
 let baseUrl = PROTOCOL + "://" + ADDRESS + ":" + PORT;
@@ -48,7 +48,8 @@ let base = {
   docDelete: "/Doc/Delete",
   userDelete: "/User/Delete",
   userList: "/User/GetList",
-  UserUpdate: "/User/Update",
+  userUpdate: "/User/Update",
+  userQuery: "/User/Query",
 };
 
 export default base;

@@ -195,24 +195,28 @@ router.post('/Delete', async function (req, res, next) {
     })
     return
   } else {
-    let user = await models.User.findOne({
-      where: {
-        user_no: req.body.user_no,
-        jur: {
-          [Op.gte]: req.user.dataValues.jur
-        }
+    let where = {
+      user_no: {
+        [Op.eq]: req.body.user_no
+      },
+      jur: {
+        [Op.gte]: req.user.dataValues.jur
       }
+    }
+    let user = await models.User.findOne({
+      where
     })
     if (req.user.dataValues.jur <= 1) {
       await user.destroy()
-      res.status.json({
+      res.status(200).json({
         status: true,
         errmsg: ""
       })
+      return
     } else {
-      if (req.user.dataValues.unit = user.unit) {
+      if (req.user.dataValues.unit == user.unit) {
         await user.destroy()
-        res.status.json({
+        res.status(200).json({
           status: true,
           errmsg: ""
         })
@@ -251,24 +255,23 @@ router.post('/Query', async function (req, res, next) {
       [Op.like]: '%' + data.phone + '%'
     }
     if (data.unit) where.unit = {
-      [Op.eq]: '%' + data.unit + '%'
+      [Op.eq]: data.unit
     }
     if (req.user.jur == 2) where.unit = {
-      [Op.eq]: '%' + req.user.dataValues.unit + '%'
+      [Op.eq]: req.user.dataValues.unit
     }
 
-
-    let UserList = models.User.findAll({
+    let UserList = await models.User.findAll({
       where
     })
     UserList.forEach(value => {
       User.push({
         user_no: value.user_no,
-        reg_date: value.createAt,
+        reg_date: value.createdAt,
         name: value.name,
         phone: value.phone,
         unit: value.unit,
-        jur: value.unit
+        jur: value.jur
       })
     })
     res.status(200).json({

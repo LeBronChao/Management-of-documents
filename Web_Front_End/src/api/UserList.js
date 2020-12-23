@@ -12,9 +12,25 @@ export function UserListReq(render) {
     });
 }
 export function UserDeleteReq(user_no) {
-  let data = { user_no };
+  let data = { user_no: user_no };
   axios
     .post(base.userDelete, data)
+    .then((res) => {
+      if (res.data.status) {
+        alert("操作成功！");
+      } else {
+        alert(res.data.errmsg);
+      }
+    })
+    .catch((e) => {
+      alert("操作失败！");
+      console.log(e);
+    });
+}
+
+export function UserUpdateReq(user_data) {
+  axios
+    .post(base.userUpdate, user_data)
     .then((res) => {
       if (res.data.status) {
         alert("操作成功！");
@@ -26,17 +42,27 @@ export function UserDeleteReq(user_no) {
     });
 }
 
-export function UserUpdate(user_no) {
-  let data = { user_no };
+export function UnitQueryReq(render, unit) {
+  let data = { unit: unit };
   axios
-    .post(base.userUpdate, data)
+    .post(base.userQuery, data)
     .then((res) => {
-      if (res.data.status) {
-        alert("操作成功！");
-      }
+      render(res.data.User);
     })
     .catch((e) => {
-      alert("操作失败！");
+      console.log(e);
+    });
+}
+
+export function NameQueryReq(render, name) {
+  let data = { name: name };
+  axios
+    .post(base.userQuery, data)
+    .then((res) => {
+      alert("操作成功！");
+      render(res.data.User);
+    })
+    .catch((e) => {
       console.log(e);
     });
 }
