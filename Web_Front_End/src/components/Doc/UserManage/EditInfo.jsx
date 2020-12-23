@@ -19,7 +19,6 @@ function EditInfo(props) {
     values.user_no = props.userData.user_no;
     UserUpdateReq(values);
     props.changeVisible(false);
-    props.reflash();
   };
 
   const onCancel = () => {

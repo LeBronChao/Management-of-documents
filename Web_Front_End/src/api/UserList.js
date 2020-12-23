@@ -25,6 +25,9 @@ export function UserDeleteReq(user_no) {
     .catch((e) => {
       alert("操作失败！");
       console.log(e);
+    })
+    .finally(() => {
+      window.location.reload();
     });
 }
 
@@ -39,27 +42,20 @@ export function UserUpdateReq(user_data) {
     .catch((e) => {
       alert("操作失败！");
       console.log(e);
-    });
-}
-
-export function UnitQueryReq(render, unit) {
-  let data = { unit: unit };
-  axios
-    .post(base.userQuery, data)
-    .then((res) => {
-      render(res.data.User);
     })
-    .catch((e) => {
-      console.log(e);
+    .finally(() => {
+      window.location.reload();
     });
 }
 
-export function NameQueryReq(render, name) {
-  let data = { name: name };
+export function UserQueryReq(render, unit = "", name = "") {
+  let data = {
+    unit,
+    name,
+  };
   axios
     .post(base.userQuery, data)
     .then((res) => {
-      alert("操作成功！");
       render(res.data.User);
     })
     .catch((e) => {
