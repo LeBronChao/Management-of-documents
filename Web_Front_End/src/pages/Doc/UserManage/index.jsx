@@ -14,7 +14,13 @@ function UserManage(props) {
   let [loading, setLoading] = useState(true);
   let [user_list, setUserList] = useState([]);
   let [visible, setVisible] = useState(false);
-  let [user_data, setUserData] = useState();
+  let [user_data, setUserData] = useState({
+    user_no: "",
+    jur: "",
+    name: "",
+    phone: "",
+    unit: "",
+  });
   let [unit, setUnit] = useState();
   let [userName, setUserName] = useState();
 
@@ -107,8 +113,10 @@ function UserManage(props) {
             <Button
               style={{ color: "#1890ff", borderColor: "#1890ff" }}
               onClick={() => {
-                setVisible(true);
-                setUserData(record);
+                setTimeout(() => {
+                  setVisible(true);
+                  setUserData(record);
+                }, 0);
               }}
             >
               编辑

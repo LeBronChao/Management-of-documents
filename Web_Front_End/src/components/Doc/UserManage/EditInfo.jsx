@@ -1,5 +1,5 @@
 import { Form, Input, Select, Modal } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UserUpdateReq } from "../../../api/UserList";
 const { Option } = Select;
 
@@ -15,6 +15,16 @@ function EditInfo(props) {
     JSON.parse(window.sessionStorage.getItem("sztu_doc_user")).jur === 0
       ? false
       : true;
+
+  useEffect(() => {
+    let temp = {};
+    for (var key in props.userData) {
+      temp[key] = props.userData[key];
+    }
+    temp.jur = arr[temp.jur];
+    form.setFieldsValue(temp);
+  }, [props.userData]);
+
   const onSubmit = (values) => {
     values.user_no = props.userData.user_no;
     UserUpdateReq(values);
@@ -22,6 +32,7 @@ function EditInfo(props) {
   };
 
   const onCancel = () => {
+    console.log(props.userData);
     props.changeVisible(false);
   };
 
@@ -44,15 +55,17 @@ function EditInfo(props) {
           });
       }}
     >
-      <Form {...layout} form={form} name="control-hooks">
+      <Form
+        {...layout}
+        form={form}
+        name="control-hooks"
+        initialValues={props.userData}
+      >
         <Form.Item name="user_no" label="用户名">
-          {!props.userData ? "" : props.userData.user_no}
+          {props.userData.user_no}
         </Form.Item>
         <Form.Item name="jur" label="权限">
-          <Select
-            defaultValue={arr[!props.userData ? "" : props.userData.jur]}
-            name="jur"
-          >
+          <Select>
             <Option value="0" disabled={isSuper}>
               超级管理员
             </Option>
@@ -64,16 +77,13 @@ function EditInfo(props) {
           </Select>
         </Form.Item>
         <Form.Item name="name" label="姓名">
-          <Input defaultValue={!props.userData ? "" : props.userData.name} />
+          <Input />
         </Form.Item>
         <Form.Item name="phone" label="手机号">
-          <Input defaultValue={!props.userData ? "" : props.userData.phone} />
+          <Input />
         </Form.Item>
         <Form.Item name="unit" label="单位">
-          <Select
-            defaultValue={!props.userData ? "" : props.userData.unit}
-            name="unit"
-          >
+          <Select name="unit">
             <Option value="大数据与互联网学院">大数据与互联网学院</Option>
             <Option value="中德智能制造学院">中德智能制造学院</Option>
             <Option value="创意与设计学院">创意与设计学院</Option>
