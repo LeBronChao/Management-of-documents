@@ -57,6 +57,9 @@ function Login(props) {
             value={password}
             onChange={changeHandler}
             size="large"
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) navToHome();
+            }}
           />
         </Form.Item>
       </Form>
