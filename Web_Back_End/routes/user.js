@@ -167,7 +167,7 @@ router.post('/Update', async function (req, res, next) {
       name: data.name,
       phone: data.phone,
       unit: data.unit,
-      jur: data.jur,
+      jur: parseInt(data.jur),
     })
     if (data.password) {
       await user.update({
