@@ -26,8 +26,12 @@ function EditInfo(props) {
   }, [props.userData]);
 
   const onSubmit = (values) => {
-    values.user_no = props.userData.user_no;
-    UserUpdateReq(values);
+    let temp = {};
+    for (var key in values) {
+      temp[key] = values[key];
+    }
+    temp.jur = arr.indexOf(values.jur);
+    UserUpdateReq(temp);
     props.changeVisible(false);
   };
 
@@ -66,14 +70,14 @@ function EditInfo(props) {
         </Form.Item>
         <Form.Item name="jur" label="权限">
           <Select>
-            <Option value="0" disabled={isSuper}>
+            <Option value=" 超级管理员" disabled={isSuper}>
               超级管理员
             </Option>
-            <Option value="1" disabled={isSuper}>
+            <Option value="总管理员" disabled={isSuper}>
               总管理员
             </Option>
-            <Option value="2">部门管理员</Option>
-            <Option value="3">普通用户</Option>
+            <Option value="部门管理员">部门管理员</Option>
+            <Option value="普通用户">普通用户</Option>
           </Select>
         </Form.Item>
         <Form.Item name="name" label="姓名">
