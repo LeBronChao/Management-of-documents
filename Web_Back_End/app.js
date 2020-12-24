@@ -30,7 +30,6 @@ app.use(cookieParser());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: './public/doc_files' }).any())
 
-
 app.use(jwt({
   secret: 'secret12345',
   algorithms: ['HS256']
