@@ -29,14 +29,14 @@ function DocManage(props) {
       dataIndex: 'unit',
       key: 'unit',
       align: 'center',
-      width: '180px'
+      width: '188px'
     },
     {
       title: '公文标题',
       dataIndex: 'title',
       key: 'title',
       align: 'center',
-      width: '510px',
+      width: '506px',
       render: (value) => {
         let styleObj = {}
         styleObj.color = value[1] == 1 ? "red" : "black"
@@ -45,6 +45,13 @@ function DocManage(props) {
           <div style={styleObj}>{value[0]}</div>
         )
       }
+    },
+    {
+      title: '点击量',
+      dataIndex: 'click_count',
+      key: 'click_count',
+      align: 'center',
+      width: '80px'
     },
     {
       title: '状态',
@@ -130,7 +137,7 @@ function DocManage(props) {
             placeholder="输入标题搜索"
             allowClear
             onSearch={SerachDoc}
-            style={{ width: 360, margin: '0 0 0 196px ' }}
+            style={{ width: 360, margin: '0 0 0 316px ' }}
           />
         </div>
         <main className="doclist-body">

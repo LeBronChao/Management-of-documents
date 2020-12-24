@@ -29,14 +29,14 @@ function DocList(props) {
       dataIndex: "unit",
       key: "unit",
       align: "center",
-      width: "180px",
+      width: "188px",
     },
     {
       title: "公文标题",
       dataIndex: "title",
       key: "title",
       align: "center",
-      width: "514px",
+      width: "506px",
       render: (value) => {
         let styleObj = {};
         styleObj.color = value[1] == 1 ? "red" : "black";
@@ -122,7 +122,7 @@ function DocList(props) {
             placeholder="输入标题搜索"
             allowClear
             onSearch={SerachDoc}
-            style={{ width: 360, margin: "0 0 0 196px " }}
+            style={{ width: 360, margin: "0 0 0 316px " }}
           />
         </div>
         <main className="doclist-body">
