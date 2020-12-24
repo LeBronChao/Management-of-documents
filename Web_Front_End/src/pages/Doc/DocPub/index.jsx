@@ -8,7 +8,7 @@ import BraftEditor from 'braft-editor'
 const { Option } = Select
 
 
-function DocPub() {
+function DocPub(props) {
   let user = JSON.parse(sessionStorage.getItem('sztu_doc_user'))
   const [doc_type, setdoc_type] = useState("")
   const [title, settitle] = useState("")
@@ -40,6 +40,10 @@ function DocPub() {
     settext_html('')
     text_ref.current.clearEditorContent()
     setunit("")
+  }
+
+  function nav() {
+    props.history.push('/Doc/DocManage')
   }
 
   function importFile() {
@@ -74,7 +78,7 @@ function DocPub() {
         file = new FormData()
         file.append('avatar', doc_file.current.files[0])
       }
-      DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, file, file_name, init)
+      DocPubReq(doc_type, title, if_red, if_bold, text, text_html, unit, file, file_name, nav)
     }
   }
 
@@ -139,7 +143,7 @@ function DocPub() {
               <Option value="计划财务部">计划财务部</Option>
               <Option value="图书馆">图书馆</Option>
               <Option value="安全保卫中心">安全保卫中心</Option>
-              <Option value="后勤保障部<">后勤保障部</Option>
+              <Option value="后勤保障部">后勤保障部</Option>
               <Option value="校团委">校团委</Option>
             </Select>
           </div>

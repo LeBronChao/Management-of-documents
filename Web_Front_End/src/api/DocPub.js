@@ -2,7 +2,7 @@ import axios from 'axios'
 import base from './main'
 
 
-export async function DocPubReq(type, title, color, bold, text, text_html, unit, file, file_name, init) {
+export async function DocPubReq(type, title, color, bold, text, text_html, unit, file, file_name, nav) {
   let file_path, houzhui
   let bool1, bool2, errmsg = ''
 
@@ -31,12 +31,9 @@ export async function DocPubReq(type, title, color, bold, text, text_html, unit,
   if (!file)
     bool2 = true
   if (bool1 && bool2) {
-    init()
-    init()
+    nav()
     alert('发布成功！')
   } else {
     alert('发布失败' + errmsg)
   }
-
-
 }

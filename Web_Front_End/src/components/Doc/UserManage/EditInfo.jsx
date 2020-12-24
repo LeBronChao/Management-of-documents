@@ -70,7 +70,7 @@ function EditInfo(props) {
         </Form.Item>
         <Form.Item name="jur" label="权限">
           <Select>
-            <Option value=" 超级管理员" disabled={isSuper}>
+            <Option value="超级管理员" disabled={isSuper}>
               超级管理员
             </Option>
             <Option value="总管理员" disabled={isSuper}>
@@ -118,7 +118,7 @@ function EditInfo(props) {
             <Option value="计划财务部">计划财务部</Option>
             <Option value="图书馆">图书馆</Option>
             <Option value="安全保卫中心">安全保卫中心</Option>
-            <Option value="后勤保障部<">后勤保障部</Option>
+            <Option value="后勤保障部">后勤保障部</Option>
             <Option value="校团委">校团委</Option>
           </Select>
         </Form.Item>

@@ -195,7 +195,7 @@ function Register(props) {
             <Option value="计划财务部">计划财务部</Option>
             <Option value="图书馆">图书馆</Option>
             <Option value="安全保卫中心">安全保卫中心</Option>
-            <Option value="后勤保障部<">后勤保障部</Option>
+            <Option value="后勤保障部">后勤保障部</Option>
             <Option value="校团委">校团委</Option>
           </Select>
         </Form.Item>

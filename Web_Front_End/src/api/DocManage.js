@@ -29,13 +29,15 @@ export function DocExmReq(doc_no, status, nav) {
 
 export function DocDeleteReq(doc_no, nav) {
   let data = { doc_no }
-  axios.post(base.docDelete, data).then((res) => {
-    if (res.data.status) {
-      alert('操作成功！')
-      nav()
-    }
-  }).catch((e) => {
-    alert('操作失败！')
-    console.log(e);
-  })
+  if (window.confirm('你确认要删除这篇公文吗？') == true) {
+    axios.post(base.docDelete, data).then((res) => {
+      if (res.data.status) {
+        alert('操作成功！')
+        nav()
+      }
+    }).catch((e) => {
+      alert('操作失败！')
+      console.log(e);
+    })
+  }
 }
