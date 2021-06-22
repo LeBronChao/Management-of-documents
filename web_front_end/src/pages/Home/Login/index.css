@@ -1,0 +1,84 @@
+@media only screen and (min-width: 768px) {
+  #loginText {
+    text-align: center;
+    padding-top: 114px;
+    width: 40px;
+    font-size: 18px;
+    padding-bottom: 18px;
+    margin: 0 auto 30px auto;
+    border-bottom: 2px solid #14579b;
+  }
+  #loginBtn {
+    display: block;
+    margin: 0 auto;
+    width: 380px;
+    height: 56px;
+    line-height: 23px;
+    border-radius: 28px;
+    background-color: rgba(20, 87, 155, 100);
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+  }
+  #loginBtn:focus {
+    outline: none;
+  }
+
+  #rigister_Text {
+    font-size: 12px;
+    margin: 18px auto 0 auto;
+    width: 108px;
+  }
+  #nl_rg {
+    color: #14579b;
+    text-decoration: none;
+  }
+
+  .ant-form {
+    width: 385px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #loginText {
+    text-align: center;
+    padding-top: 60%;
+    width: 40px;
+    font-size: 18px;
+    padding-bottom: 18px;
+    margin: 0 auto 30px auto;
+    border-bottom: 2px solid #14579b;
+  }
+  #loginBtn {
+    display: block;
+    margin: 0 auto;
+    width: 30%;
+    height: 5%;
+    line-height: 23px;
+    border-radius: 28px;
+    background-color: rgba(20, 87, 155, 100);
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+  }
+  #loginBtn:focus {
+    outline: none;
+  }
+
+  #rigister_Text {
+    font-size: 12px;
+    margin: 18px auto 0 auto;
+    width: 108px;
+  }
+  #nl_rg {
+    color: #14579b;
+    text-decoration: none;
+  }
+  .ant-form-item-control-input {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

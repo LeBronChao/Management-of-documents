@@ -1,0 +1,12 @@
+.userlist-container {
+  width: 1080px;
+  margin-top: 12px;
+}
+
+.userlist-body {
+  margin-top: 17px;
+}
+
+.ant-input-borderless {
+  padding: 4px 0px !important;
+}

@@ -1,0 +1,46 @@
+.detail {
+  width: 100%;
+}
+
+.detail_container {
+  margin-top: 30px;
+  width: 995px;
+  min-height: 70vh;
+  border: 0.5px solid #BBBBBB;
+  padding: 30px 60px;
+}
+
+.detail_title {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.detail_type {
+  margin-top: 10px;
+  color: #0050b3;
+  font-size: 12px;
+}
+
+.detail_text {
+  margin-top: 30px;
+}
+
+.detail_unit {
+  font-size: 18px;
+  font-weight: 500;
+  justify-content: flex-end;
+}
+
+
+.detail_msg {
+  display: flex;
+  margin-top: 10px;
+  width: 995px;
+  margin-bottom: 30px;
+}
+
+.detail_click_container {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
